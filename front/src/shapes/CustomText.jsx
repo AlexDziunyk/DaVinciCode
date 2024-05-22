@@ -45,8 +45,8 @@ const CustomText = ({ shapeProps, isSelected, onSelect, onChange }) => {
             x: node.x(),
             y: node.y(),
             // set minimal value
-            width: Math.max(5, node.width() * scaleX),
-            height: Math.max(node.height() * scaleY),
+            // width: Math.max(5, node.width() * scaleX),
+            // height: Math.max(node.height() * scaleY),
             fontSize: Math.max(node.height() * scaleY)
           });
         }}

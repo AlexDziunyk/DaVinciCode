@@ -3,9 +3,37 @@
   background: white;
   padding: 10px;
   width: 500px;
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  overflow: auto;
+  box-sizing: border-box;
 
-  .toolbar-title {
-    
+  .toolbar-title {}
+
+  .toolbar__tools_item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    background: grey;
+  }
+
+  .toolbar__images {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+
+  .toolbar__images_item {
+    width: 100%;
+    height: auto;
+  }
+
+  .toolbar__images_item img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
   }
 
 }

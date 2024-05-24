@@ -39,5 +39,12 @@ export const shapesObj = {
     y: window.innerHeight / 2,
     text: "New Text",
     id: uuidv4(),
+  },
+  image: {
+    type: "image",
+    url: "",
+    x: (window.innerWidth - 500) / 2,
+    y: window.innerHeight / 2,
+
   }
 }

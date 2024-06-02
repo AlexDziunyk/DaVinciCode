@@ -101,6 +101,7 @@ const MyBoard = ({ shapes, setShapes }) => {
                   shapeProps={shape}
                   isSelected={shape.id === selectedId}
                   onSelect={() => {
+                    console.log(shape.id)
                     selectShape(shape.id);
                   }}
                   onChange={(newAttrs) => {

@@ -10,6 +10,7 @@ export const shapesObj = {
     fill: '#cd2424',
     stroke: "#8c4b4b",
     strokeWidth: 0,
+    cornerRadius: 0,
     id: uuidv4(),
   },
   circle: {
@@ -21,6 +22,7 @@ export const shapesObj = {
     fill: '#cd2424',
     stroke: "#8c4b4b",
     strokeWidth: 0,
+    cornerRadius: 0,
     id: uuidv4(),
   },
   star: {

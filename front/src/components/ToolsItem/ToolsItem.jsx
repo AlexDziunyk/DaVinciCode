@@ -19,6 +19,8 @@ const ToolsItem = ({ selectedShape, onChange }) => {
     if (selectedShape) {
       setColor(selectedShape.fill);
       setStrokeColor(selectedShape.stroke);
+      setRadiusValue(selectedShape.cornerRadius);
+      setStrokeValue(selectedShape.strokeWidth);
     }
   }, [selectedShape]);
 

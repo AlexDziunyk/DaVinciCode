@@ -7,7 +7,10 @@ export const shapesObj = {
     y: window.innerHeight / 2,
     width: 50,
     height: 50,
-    fill: 'red',
+    fill: '#cd2424',
+    stroke: "#8c4b4b",
+    strokeWidth: 0,
+    cornerRadius: 0,
     id: uuidv4(),
   },
   circle: {
@@ -16,8 +19,10 @@ export const shapesObj = {
     y: window.innerHeight / 2,
     width: 50,
     height: 50,
-    //radius: 50,
-    fill: 'red',
+    fill: '#cd2424',
+    stroke: "#8c4b4b",
+    strokeWidth: 0,
+    cornerRadius: 0,
     id: uuidv4(),
   },
   star: {
@@ -29,12 +34,15 @@ export const shapesObj = {
     outerRadius: 10,
     width: 50,
     height: 50,
-    fill: 'red',
+    fill: '#cd2424',
+    stroke: "#8c4b4b",
+    strokeWidth: 0,
     id: uuidv4(),
   },
   text: {
     type: "text",
-    fill: 'red',
+    fill: '#cd2424',
+    stroke: "#8c4b4b",
     x: (window.innerWidth - 500) / 2,
     y: window.innerHeight / 2,
     text: "New Text",
@@ -45,6 +53,6 @@ export const shapesObj = {
     url: "",
     x: (window.innerWidth - 500) / 2,
     y: window.innerHeight / 2,
-
+    id: uuidv4(),
   }
 }

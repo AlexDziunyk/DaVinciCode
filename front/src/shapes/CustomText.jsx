@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import { Stage, Layer, Text, Transformer } from 'react-konva';
 
-const CustomText = ({layerRef, stageRef}) => {
+const CustomText = ({ layerRef, stageRef, isSelected, onSelect }) => {
   // const stageRef = useRef(null);
   // const layerRef = useRef(null);
   const textNodeRef = useRef(null);
@@ -137,6 +137,7 @@ const CustomText = ({layerRef, stageRef}) => {
   return (
     <>
       <Text
+        onClick={onSelect}
         ref={textNodeRef}
         text="Some text here"
         x={50}
@@ -145,14 +146,23 @@ const CustomText = ({layerRef, stageRef}) => {
         draggable
         width={200}
       />
-      <Transformer
-        ref={trRef}
-        enabledAnchors={['middle-left', 'middle-right']}
-        boundBoxFunc={(oldBox, newBox) => {
-          newBox.width = Math.max(30, newBox.width);
-          return newBox;
-        }}
-      />
+      {isSelected ?
+        <Transformer
+          ref={trRef}
+          enabledAnchors={['middle-left', 'middle-right']}
+          boundBoxFunc={(oldBox, newBox) => {
+            newBox.width = Math.max(30, newBox.width);
+            return newBox;
+          }}
+        />
+        :
+        <Transformer
+          ref={trRef}
+          resizeEnabled={false}
+          flipEnabled={false}
+          borderEnabled={false}
+          rotateEnabled={false}
+        />}
     </>
   );
 };

@@ -7,24 +7,42 @@ import CustomCircle from '../../shapes/Circle';
 import FiveStar from '../../shapes/FiveStar';
 import CustomText from '../../shapes/CustomText';
 import CustomImage from '../../shapes/CustomImage';
+import ToolsItem from '../ToolsItem/ToolsItem';
 
 const MyBoard = ({ shapes, setShapes }) => {
   const { onWheel, stagePos, stageScale } = useStageScale();
   const stageRef = useRef(null);
   const layerRef = useRef(null);
 
-  const [selectedId, selectShape] = useState(null);
+  const [selectedShape, setSelectedShape] = useState(null);
 
   const checkDeselect = (e) => {
     const clickedOnEmpty = e.target === e.target.getStage();
     if (clickedOnEmpty) {
-      selectShape(null);
+      setSelectedShape(null);
     }
   };
 
 
+  const onShapeTransform = (newAttrs, i) => {
+    const tempShapes = shapes.slice();
+    tempShapes[i] = newAttrs;
+    setShapes(tempShapes);
+    setSelectedShape(tempShapes[i]);
+  }
+
   return (
     <div className='board-wrapper'>
+      <ToolsItem
+        selectedShape={selectedShape}
+        onChange={(newAttrs) => {
+          const tempShapes = shapes.slice();
+          //const i = tempShapes.filter(item => item.id === selectedShape.id);
+          const chosenItem = tempShapes.filter(item => item.id === selectedShape.id)[0];
+          const i = tempShapes.indexOf(chosenItem)
+          tempShapes[i] = newAttrs;
+          setShapes(tempShapes);
+        }} />
       <Stage
         ref={stageRef}
         {...stagePos}
@@ -44,15 +62,11 @@ const MyBoard = ({ shapes, setShapes }) => {
                 <Rectangle
                   key={i}
                   shapeProps={shape}
-                  isSelected={shape.id === selectedId}
+                  isSelected={selectedShape !== null && shape.id === selectedShape.id}
                   onSelect={() => {
-                    selectShape(shape.id);
+                    setSelectedShape(shape);
                   }}
-                  onChange={(newAttrs) => {
-                    const tempShapes = shapes.slice();
-                    tempShapes[i] = newAttrs;
-                    setShapes(tempShapes);
-                  }}
+                  onChange={(newAttrs) => onShapeTransform(newAttrs, i)}
                 />
               );
             }
@@ -61,15 +75,11 @@ const MyBoard = ({ shapes, setShapes }) => {
                 <CustomCircle
                   key={i}
                   shapeProps={shape}
-                  isSelected={shape.id === selectedId}
+                  isSelected={selectedShape !== null && shape.id === selectedShape.id}
                   onSelect={() => {
-                    selectShape(shape.id);
+                    setSelectedShape(shape);
                   }}
-                  onChange={(newAttrs) => {
-                    const tempShapes = shapes.slice();
-                    tempShapes[i] = newAttrs;
-                    setShapes(tempShapes);
-                  }}
+                  onChange={(newAttrs) => onShapeTransform(newAttrs, i)}
                 />
               );
             }
@@ -79,15 +89,11 @@ const MyBoard = ({ shapes, setShapes }) => {
                 <FiveStar
                   key={i}
                   shapeProps={shape}
-                  isSelected={shape.id === selectedId}
+                  isSelected={selectedShape !== null && shape.id === selectedShape.id}
                   onSelect={() => {
-                    selectShape(shape.id);
+                    setSelectedShape(shape);
                   }}
-                  onChange={(newAttrs) => {
-                    const tempShapes = shapes.slice();
-                    tempShapes[i] = newAttrs;
-                    setShapes(tempShapes);
-                  }}
+                  onChange={(newAttrs) => onShapeTransform(newAttrs, i)}
                 />
               );
             }
@@ -99,15 +105,11 @@ const MyBoard = ({ shapes, setShapes }) => {
                   stageRef={stageRef}
                   key={i}
                   shapeProps={shape}
-                  isSelected={shape.id === selectedId}
+                  isSelected={selectedShape !== null && shape.id === selectedShape.id}
                   onSelect={() => {
-                    selectShape(shape.id);
+                    setSelectedShape(shape);
                   }}
-                  onChange={(newAttrs) => {
-                    const tempShapes = shapes.slice();
-                    tempShapes[i] = newAttrs;
-                    setShapes(tempShapes);
-                  }}
+                  onChange={(newAttrs) => onShapeTransform(newAttrs, i)}
                 />
               );
             }
@@ -117,15 +119,11 @@ const MyBoard = ({ shapes, setShapes }) => {
                 <CustomImage
                   key={i}
                   shapeProps={shape}
-                  isSelected={shape.id === selectedId}
+                  isSelected={selectedShape !== null && shape.id === selectedShape.id}
                   onSelect={() => {
-                    selectShape(shape.id);
+                    setSelectedShape(shape);
                   }}
-                  onChange={(newAttrs) => {
-                    const tempShapes = shapes.slice();
-                    tempShapes[i] = newAttrs;
-                    setShapes(tempShapes);
-                  }}
+                  onChange={(newAttrs) => onShapeTransform(newAttrs, i)}
                 />
               );
             }

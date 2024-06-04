@@ -1,9 +1,16 @@
 .board-wrapper {
-  background-color: red;
+  // background-color: red;
 
   .board {
-    background-color: rgb(240, 229, 229);
-    
+    background-color: rgb(206, 203, 203);
+
+    // background-image:
+    //   radial-gradient(rgb(196, 196, 196) 10%, transparent 10%),
+    //   radial-gradient(rgb(196, 196, 196) 10%, transparent 10%);
+    // background-position: 0px 0px, 12px 12px;
+    // background-size: 24px 24px;
+    // background-color: rgb(255, 255, 255);
+
   }
 
   .tools {

@@ -41,11 +41,14 @@ export const shapesObj = {
   },
   text: {
     type: "text",
+    fontSize: 16,
     fill: '#cd2424',
-    stroke: "#8c4b4b",
     x: (window.innerWidth - 500) / 2,
     y: window.innerHeight / 2,
     text: "New Text",
+    fontStyle: "",
+    textDecoration: "",
+    align: "center",
     id: uuidv4(),
   },
   image: {

@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import { Stage, Layer, Text, Transformer } from 'react-konva';
 
-const CustomText = ({ layerRef, stageRef, isSelected, onSelect }) => {
+const CustomText = ({ layerRef, stageRef, isSelected, onSelect, textProps }) => {
   // const stageRef = useRef(null);
   // const layerRef = useRef(null);
   const textNodeRef = useRef(null);
@@ -142,9 +142,8 @@ const CustomText = ({ layerRef, stageRef, isSelected, onSelect }) => {
         text="Some text here"
         x={50}
         y={80}
-        fontSize={20}
         draggable
-        width={200}
+        {...textProps}
       />
       {isSelected ?
         <Transformer

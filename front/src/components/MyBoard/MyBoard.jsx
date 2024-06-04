@@ -1,7 +1,7 @@
 import { Stage, Layer, Rect, Circle, Star, Text } from 'react-konva';
 import { useStageScale } from '../../hooks/useStageScale';
 import Rectangle from '../../shapes/Rectangle';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './style.scss';
 import CustomCircle from '../../shapes/Circle';
 import FiveStar from '../../shapes/FiveStar';
@@ -104,7 +104,7 @@ const MyBoard = ({ shapes, setShapes }) => {
                   layerRef={layerRef}
                   stageRef={stageRef}
                   key={i}
-                  shapeProps={shape}
+                  textProps={shape}
                   isSelected={selectedShape !== null && shape.id === selectedShape.id}
                   onSelect={() => {
                     setSelectedShape(shape);

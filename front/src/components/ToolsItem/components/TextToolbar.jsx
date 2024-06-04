@@ -8,6 +8,8 @@ import { AiOutlineStrikethrough } from "react-icons/ai";
 import { FaAlignLeft } from "react-icons/fa6";
 import { FaAlignRight } from "react-icons/fa6";
 import { FaAlignCenter } from "react-icons/fa6";
+import { MdTexture } from "react-icons/md";
+import { Slider } from '@mui/material';
 
 const TextToolbar = ({ selectedShape, onChange }) => {
 
@@ -19,6 +21,8 @@ const TextToolbar = ({ selectedShape, onChange }) => {
   const [isUnderline, setIsUnderline] = useState(false);
   const [isLineThrough, setIsLineThrough] = useState(false);
   const [textAlign, setTextAlign] = useState("center");
+  const [isOpacityActive, setIsOpacityActive] = useState(false);
+  const [opacity, setOpacity] = useState(100);
 
   useEffect(() => {
     setIsTextColorActive(false);
@@ -26,11 +30,14 @@ const TextToolbar = ({ selectedShape, onChange }) => {
     setIsItalics(false);
     setIsUnderline(false);
     setIsLineThrough(false);
+    setIsOpacityActive(false);
 
     if (selectedShape) {
       setFontSize(selectedShape.fontSize);
       setTextColor(selectedShape.fill);
       setTextAlign(selectedShape.align);
+      setOpacity(selectedShape.opacity * 100);
+      setIsOpacityActive(false);
 
       const fontStyleString = selectedShape.fontStyle;
 
@@ -60,10 +67,11 @@ const TextToolbar = ({ selectedShape, onChange }) => {
       fontSize: fontSize,
       fontStyle: `${bold} ${italics}`,
       textDecoration: `${underline}${lineThrough}`,
-      align: textAlign
+      align: textAlign,
+      opacity: opacity / 100,
     });
 
-  }, [isBold, isItalics, fontSize, textColor, isUnderline, isLineThrough, textAlign]);
+  }, [isBold, isItalics, fontSize, textColor, isUnderline, isLineThrough, textAlign, opacity]);
 
   return (
     <div className='items'>
@@ -117,7 +125,7 @@ const TextToolbar = ({ selectedShape, onChange }) => {
         setIsLineThrough(prev => !prev);
         setIsUnderline(false);
       }} className={`icon-box ${isLineThrough ? "chosen" : ""}`}>
-        <AiOutlineStrikethrough size={16} />
+        <AiOutlineStrikethrough size={18} />
       </div>
       <div onClick={() => {
         if (textAlign === "left") {
@@ -131,6 +139,18 @@ const TextToolbar = ({ selectedShape, onChange }) => {
         {textAlign === "left" && <FaAlignLeft />}
         {textAlign === "center" && <FaAlignCenter />}
         {textAlign === "right" && <FaAlignRight />}
+      </div>
+      <div onClick={() => setIsOpacityActive(true)} className='icon-box'>
+        <MdTexture size={20} />
+        {isOpacityActive && <div className='opacity-block'>
+          <p className='slider__title'>Stroke Size</p>
+          <div className='opacity-slider'>
+            <Slider value={opacity} onChange={(e, newValue) => {
+              setOpacity(newValue);
+            }} />
+            <input className='slider__value' readOnly value={opacity} onChange={(e) => setOpacity(e.target.value)}></input>
+          </div>
+        </div>}
       </div>
 
     </div>

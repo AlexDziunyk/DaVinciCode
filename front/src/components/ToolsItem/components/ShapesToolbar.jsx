@@ -26,7 +26,7 @@ const ShapesToolbar = ({ selectedShape, onChange }) => {
   }, [selectedShape]);
 
   return (
-    <div className='items'>
+    <>
       <div onClick={() => setIsColorActive(true)} className='color-box' style={{ backgroundColor: color }}></div>
       {isColorActive && <div className='color-picker'>
         <HexColorPicker color={color} onChange={(newColor) => {
@@ -62,7 +62,7 @@ const ShapesToolbar = ({ selectedShape, onChange }) => {
           onChange({ ...selectedShape, stroke: newColor })
         }} />
       </div>}
-    </div>
+    </>
   )
 }
 

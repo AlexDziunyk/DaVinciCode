@@ -31,10 +31,33 @@ const MyBoard = ({ shapes, setShapes }) => {
     setSelectedShape(tempShapes[i]);
   }
 
+  const moveHigher = (shape) => {
+    const tempShapes = shapes.slice();
+    const chosenItem = tempShapes.filter(shape => shape.id === selectedShape.id)[0];
+
+    const i = tempShapes.indexOf(chosenItem)
+    const filteredShapes = tempShapes.filter((__, index) => i !== index)
+
+    console.log(filteredShapes, chosenItem, i)
+
+    setShapes([...filteredShapes, shape]);
+  }
+
+  const moveLower = (shape) => {
+    const tempShapes = shapes.slice();
+    const chosenItem = tempShapes.filter(shape => shape.id === selectedShape.id)[0];
+    const i = tempShapes.indexOf(chosenItem)
+    const filteredShapes = tempShapes.filter((__, index) => i !== index)
+
+    setShapes([shape, ...filteredShapes]);
+  }
+
   return (
     <div className='board-wrapper'>
       <ToolsItem
         selectedShape={selectedShape}
+        moveHigher={moveHigher}
+        moveLower={moveLower}
         onChange={(newAttrs) => {
           const tempShapes = shapes.slice();
           //const i = tempShapes.filter(item => item.id === selectedShape.id);

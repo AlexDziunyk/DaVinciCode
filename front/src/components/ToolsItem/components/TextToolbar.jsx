@@ -74,7 +74,7 @@ const TextToolbar = ({ selectedShape, onChange }) => {
   }, [isBold, isItalics, fontSize, textColor, isUnderline, isLineThrough, textAlign, opacity]);
 
   return (
-    <div className='items'>
+    <>
       <div className='font-size'>
         <button onClick={() => {
           if (fontSize <= 2) {
@@ -153,7 +153,7 @@ const TextToolbar = ({ selectedShape, onChange }) => {
         </div>}
       </div>
 
-    </div>
+    </>
   )
 }
 

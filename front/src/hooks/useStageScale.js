@@ -11,7 +11,7 @@ export const useStageScale = () => {
   const onWheel = (e) => {
     e.evt.preventDefault();
     const scaleBy = 1.1;
-    const scaleBorder = { min: 0.1, max: 2 };
+    const scaleBorder = { min: 0.5, max: 3 };
 
     const stage = e.target.getStage();
     if (!stage) return;

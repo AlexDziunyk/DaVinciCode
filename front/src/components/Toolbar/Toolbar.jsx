@@ -3,10 +3,12 @@ import { v4 as uuidv4 } from 'uuid';
 import './style.scss';
 import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
+import customAxios from '../../axios/axios';
 import shapesImg from '../../assets/shapes.svg';
 import imagesImg from '../../assets/images.svg';
 import { FaCloudUploadAlt } from "react-icons/fa";
-import Konva from 'konva';
+import { FaRobot } from "react-icons/fa";
+
 
 const Toolbar = ({ shapes, setShapes }) => {
 
@@ -14,6 +16,8 @@ const Toolbar = ({ shapes, setShapes }) => {
   const [photos, setPhotos] = useState([]);
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const [newUploadedFile, setNewUploadedFile] = useState("");
+  const [promptValue, setNewPromptValue] = useState("");
+  const [generatedImages, setGeneratedImages] = useState([]);
   const uploadInputRef = useRef(null);
 
   const debounce = (func, wait) => {
@@ -35,14 +39,23 @@ const Toolbar = ({ shapes, setShapes }) => {
     setShapes((prevShapes) => [...prevShapes, shape]);
   }, 50);
 
-  const addImage = debounce((image) => {
+  const addImage = debounce((image, isUrl) => {
     const shape = { ...shapesObj["image"], id: uuidv4() };
-    shape.url = image.urls.small;
+    shape.url = isUrl ? image : image.urls.small;
     shape.width = 220;
     shape.height = 320;
     setShapes((prevShapes) => [...prevShapes, shape]);
   }, 50);
 
+
+  const generateImage = async() => {
+    const { data } = await customAxios.post('/openai/generate-image', { prompt: promptValue });
+
+    console.log(data.result);
+
+    setGeneratedImages(prev => [data.result, ...prev]);
+
+  }
 
   useEffect(() => {
     const fetchPhotos = async () => {
@@ -79,6 +92,9 @@ const Toolbar = ({ shapes, setShapes }) => {
         <div onClick={() => setChosenCategory("upload")} className='toolbar__tools_item'>
           <FaCloudUploadAlt />
         </div>
+        <div onClick={() => setChosenCategory("ai")} className='toolbar__tools_item'>
+          <FaRobot />
+        </div>
       </div>
 
       {chosenCategory === "shapes" && <div className='toolbar__shapes'>
@@ -109,7 +125,20 @@ const Toolbar = ({ shapes, setShapes }) => {
         }}>Upload image</button>
         {uploadedFiles && uploadedFiles.map((item, index) => {
           return (
-            <div className='toolbar__images_item' key={index} onClick={() => addImage(item)}>
+            <div className='toolbar__images_item' key={index} onClick={() => addImage(item, true)}>
+              <img width={40} height={60} src={item}></img>
+            </div>
+          )
+        })}
+      </div>}
+
+      {chosenCategory === "ai" && <div>
+        <p className='toolbar-title'>Uploads</p>
+        <input value={promptValue} onChange={(e) => setNewPromptValue(e.target.value)} type="text"></input>
+        <button onClick={generateImage}>Generate AI IMage</button>
+        {generatedImages && generatedImages.map((item, index) => {
+          return (
+            <div className='toolbar__images_item' key={index} onClick={() => addImage(item, true)}>
               <img width={40} height={60} src={item}></img>
             </div>
           )

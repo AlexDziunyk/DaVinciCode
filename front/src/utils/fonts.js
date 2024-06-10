@@ -1,0 +1,17 @@
+export const fontsArr = [
+  "Knewave",
+  "Titan One",
+  "Geologica",
+  "Domine",
+  "Anton",
+  "DM Serif Text",
+  "Ubuntu",
+  "Rubik",
+  "Noto Serif",
+  "Josefin Sans",
+  "Raleway",
+  "Lato",
+  "Open Sans",
+  "Tiny5",
+  "Roboto",
+]

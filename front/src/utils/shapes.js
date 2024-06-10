@@ -42,6 +42,7 @@ export const shapesObj = {
   text: {
     type: "text",
     fontSize: 24,
+    fontFamily: "Roboto",
     fill: '#cd2424',
     width: 200,
     x: (window.innerWidth - 500) / 2,

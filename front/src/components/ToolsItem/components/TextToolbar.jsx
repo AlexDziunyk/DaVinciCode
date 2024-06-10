@@ -9,6 +9,7 @@ import { FaAlignLeft } from "react-icons/fa6";
 import { FaAlignRight } from "react-icons/fa6";
 import { FaAlignCenter } from "react-icons/fa6";
 import { MdTexture } from "react-icons/md";
+import { fontsArr } from '../../../utils/fonts';
 import { Slider } from '@mui/material';
 
 const TextToolbar = ({ selectedShape, onChange }) => {
@@ -23,6 +24,8 @@ const TextToolbar = ({ selectedShape, onChange }) => {
   const [textAlign, setTextAlign] = useState("center");
   const [isOpacityActive, setIsOpacityActive] = useState(false);
   const [opacity, setOpacity] = useState(100);
+  const [fontFamily, setFontFamily] = useState("");
+  const [isFontFamilyActive, setIsFontFamilyActive] = useState(false);
 
   useEffect(() => {
     setIsTextColorActive(false);
@@ -31,13 +34,14 @@ const TextToolbar = ({ selectedShape, onChange }) => {
     setIsUnderline(false);
     setIsLineThrough(false);
     setIsOpacityActive(false);
+    setIsFontFamilyActive(false);
 
     if (selectedShape) {
       setFontSize(selectedShape.fontSize);
       setTextColor(selectedShape.fill);
       setTextAlign(selectedShape.align);
       setOpacity(selectedShape.opacity * 100);
-      setIsOpacityActive(false);
+      setFontFamily(selectedShape.fontFamily);
 
       const fontStyleString = selectedShape.fontStyle;
 
@@ -53,7 +57,7 @@ const TextToolbar = ({ selectedShape, onChange }) => {
     }
   }, [selectedShape]);
 
-
+  
   useEffect(() => {
     const bold = isBold ? "bold" : "";
     const italics = isItalics ? "italic" : "";
@@ -69,12 +73,21 @@ const TextToolbar = ({ selectedShape, onChange }) => {
       textDecoration: `${underline}${lineThrough}`,
       align: textAlign,
       opacity: opacity / 100,
+      fontFamily: fontFamily
     });
 
-  }, [isBold, isItalics, fontSize, textColor, isUnderline, isLineThrough, textAlign, opacity]);
+  }, [isBold, isItalics, fontSize, textColor, isUnderline, isLineThrough, textAlign, opacity, fontFamily]);
 
   return (
     <>
+      <input onClick={() => setIsFontFamilyActive(true)}  value={fontFamily} readOnly></input>
+      {isFontFamilyActive && <div className='fonts'>
+        {fontsArr.map((item, index) => {
+          return <div onClick={() => {
+            setFontFamily(item);
+          }} className='fonts__item' key={index}>{item}</div>
+        })}
+      </div>}
       <div className='font-size'>
         <button onClick={() => {
           if (fontSize <= 2) {
@@ -152,7 +165,6 @@ const TextToolbar = ({ selectedShape, onChange }) => {
           </div>
         </div>}
       </div>
-
     </>
   )
 }

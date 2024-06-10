@@ -99,4 +99,15 @@
     width: 200px;
   }
 
+  .fonts {
+    position: absolute;
+    top: 0;
+    padding: 10px;
+    background-color: #e1e4e7;
+  }
+
+  .fonts__item {
+    cursor: pointer;
+  }
+
 }

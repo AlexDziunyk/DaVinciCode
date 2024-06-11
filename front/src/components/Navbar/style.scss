@@ -1,0 +1,43 @@
+.navbar {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  padding: 30px 55px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+
+  .navbar__links {
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    align-items: center;
+  }
+
+
+  .navbar__links_item {
+    cursor: pointer;
+    color: #FFF;
+    font-family: Montserrat;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+
+  .navbar__links_button {
+    cursor: pointer;
+    border-radius: 20px;
+    background: #FF891B;
+    color: #FFF;
+    font-family: Montserrat;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    padding: 8px 36px;
+  }
+
+}

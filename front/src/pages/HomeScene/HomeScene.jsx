@@ -1,30 +1,30 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import design1 from '../../assets/design1.png';
+import design2 from '../../assets/design2.png';
+import design3 from '../../assets/design3.png';
 import './style.scss';
 
 const Home = () => {
   return (
     <div className="home-container">
-      <header>
-        <nav>
-          <a href="#">Docs</a>
-          <a href="#">Support</a>
-          <Link to="/login">Log in</Link>
-          <Link to="/signup">Sign up</Link>
-        </nav>
-      </header>
       <main>
         <section className="start">
-          <h1>Service for graphic design</h1>
-          <p>Design Made Simple - Unleash Your Creativity</p>
-          <button id="start-creating">Start Creating Now</button>
-          <p className="rating">★ 5.0 Over <span>250+</span> customers used Inspira</p>
+          <div>
+            <h1>Service for graphic design</h1>
+            <p className='subtitle'>Design Made Simple - Unleash Your Creativity</p>
+            <p className='text'>Inspira is a cutting-edge graphic design platform tailored for both budding and seasoned designers. At its core, DesignSpark bridges the gap between traditional artistry and digital innovation, providing a seamless, intuitive interface that simplifies the design process while enhancing creativity.
+            </p>
+          </div>
+          <div>
+            <button id="start-creating">Start Creating Now</button>
+            <p className="rating"><span className='star'>★ 5.0</span> Over <span className='number'>250+</span> customers used Inspira</p>
+          </div>
         </section>
         <section className="gallery">
-          <img src="../../assets/design1.jpg" alt="Design 1" />
-          <img src="../../assets/design2.jpg" alt="Design 2" />
-          <img src="../../assets/design3.jpg" alt="Design 3" />
-          <img src="../../assets/design4.jpg" alt="Design 4" />
+          <img src={design1} alt="Design 1" />
+          <img className='image' src={design2} alt="Design 2" />
+          <img src={design3} alt="Design 3" />
         </section>
       </main>
     </div>

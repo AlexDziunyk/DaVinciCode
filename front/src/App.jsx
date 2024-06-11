@@ -14,10 +14,10 @@ function App() {
 
   const router = createBrowserRouter(createRoutesFromElements(
     <Route path="/" element={<RootPage />}>
-      <Route element={<HomePage />} />
+      <Route index element={<HomePage />} />
       <Route path="login" element={<LoginPage />} />
       <Route path="signup" element={<SignUpPage />} />
-      <Route index  element={<Scene />} />
+      <Route path="scene" element={<Scene />} />
     </Route>
   ))
 

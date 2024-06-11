@@ -1,9 +1,17 @@
-.tools-item {
-  background-color: #fff;
-  top: 0;
-  width: 100%;
-  height: 40px;
-  position: fixed;
-  z-index: 10;
+.tools__container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 
+  .tools-item {
+    background: #FFF;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    top: 0;
+    max-width: 640px;
+    width: 100%;
+    height: 40px;
+    position: fixed;
+    z-index: 10;
+  }
 }

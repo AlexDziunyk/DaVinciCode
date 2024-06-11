@@ -1,8 +1,8 @@
 .toolbar {
   z-index: 2;
-  background: white;
+  background: #10172A;
   padding: 10px;
-  width: 500px;
+  width: 386px;
   display: flex;
   flex-direction: row;
   height: 100vh;
@@ -16,7 +16,10 @@
     align-items: center;
     justify-content: center;
     padding: 10px;
-    background: grey;
+  }
+
+  .toolbar__tools_item img {
+    cursor: pointer;
   }
 
   .toolbar__images {

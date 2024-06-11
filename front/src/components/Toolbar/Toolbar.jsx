@@ -9,6 +9,12 @@ import imagesImg from '../../assets/images.svg';
 import { FaCloudUploadAlt } from "react-icons/fa";
 import { FaRobot } from "react-icons/fa";
 
+import imagesIcon from '../../assets/toolbar/Images.svg';
+import aiIcon from '../../assets/toolbar/Ai.svg';
+import elementsIcon from '../../assets/toolbar/Elements.svg';
+import textIcon from '../../assets/toolbar/Text.svg';
+import uploadIcon from '../../assets/toolbar/Uploads.svg';
+
 
 const Toolbar = ({ shapes, setShapes }) => {
 
@@ -48,7 +54,7 @@ const Toolbar = ({ shapes, setShapes }) => {
   }, 50);
 
 
-  const generateImage = async() => {
+  const generateImage = async () => {
     const { data } = await customAxios.post('/openai/generate-image', { prompt: promptValue });
 
     console.log(data.result);
@@ -84,16 +90,19 @@ const Toolbar = ({ shapes, setShapes }) => {
     <div className='toolbar'>
       <div className='toolbar__tools'>
         <div onClick={() => setChosenCategory("shapes")} className='toolbar__tools_item'>
-          <img src={shapesImg} alt='shapesImg' width={24} height={24}></img>
+          <img src={elementsIcon} alt='elementsIcon'></img>
         </div>
         <div onClick={() => setChosenCategory("images")} className='toolbar__tools_item'>
-          <img src={imagesImg} alt='imagesImg' width={24} height={24}></img>
+          <img src={imagesIcon} alt='imagesIcon'></img>
+        </div>
+        <div onClick={() => setChosenCategory("text")} className='toolbar__tools_item'>
+          <img src={textIcon} alt='textIcon'></img>
         </div>
         <div onClick={() => setChosenCategory("upload")} className='toolbar__tools_item'>
-          <FaCloudUploadAlt />
+          <img src={uploadIcon} alt='uploadIcon'></img>
         </div>
         <div onClick={() => setChosenCategory("ai")} className='toolbar__tools_item'>
-          <FaRobot />
+          <img src={aiIcon} alt='aiIcon'></img>
         </div>
       </div>
 
@@ -103,6 +112,12 @@ const Toolbar = ({ shapes, setShapes }) => {
           <h1 onClick={() => addShape("rect")}>Square</h1>
           <h1 onClick={() => addShape("circle")}>Circle</h1>
           <h1 onClick={() => addShape("star")}>Star</h1>
+        </div>
+      </div>}
+
+      {chosenCategory === "text" && <div className='toolbar__shapes'>
+        <p className='toolbar-title'>Shapes</p>
+        <div className='toolbar-items'>
           <h1 onClick={() => addShape("text")}>Text</h1>
         </div>
       </div>}

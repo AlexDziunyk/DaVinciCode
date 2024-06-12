@@ -27,6 +27,7 @@ const Navbar = () => {
         <Link className='link' to="/login"><div className='navbar__links_item'>Log In</div></Link>
         <Link className='link' to="/signup"><div className='navbar__links_button'>Sign Up</div></Link>
       </div>}
+      
       {isLoggedIn && <div className='navbar__links'>
         <Link className='link' to="/login"><div className='navbar__links_item'>Profile</div></Link>
         <Link className='link' to="/">

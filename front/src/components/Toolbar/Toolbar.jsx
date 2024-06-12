@@ -32,11 +32,35 @@ const Toolbar = ({ shapes, setShapes }) => {
     };
   };
 
-  const handleInputChange = (e) => {
-    const file = e.target.files[0];
-    setUploadedFiles(prev => [URL.createObjectURL(file), ...prev])
+  const getUploadedImages = async () => {
+    const { data } = await customAxios.get("/user/myimages");
+
+    console.log(data)
+
+    setUploadedFiles(data.result);
+
   }
 
+  useEffect(() => {
+    getUploadedImages();
+  }, []);
+
+  const uploadMyImage = async (fileImage) => {
+    const formData = new FormData();
+    formData.append('image', fileImage);
+
+    const response = await customAxios.post('/user/upload/myimages', formData);
+
+    console.log(response)
+
+  }
+
+  const handleInputChange = async (e) => {
+    const file = e.target.files[0];
+    setUploadedFiles(prev => [URL.createObjectURL(file), ...prev]);
+
+    uploadMyImage(file);
+  }
 
   const addShape = debounce((type) => {
     const shape = { ...shapesObj[type], id: uuidv4() };
@@ -51,10 +75,9 @@ const Toolbar = ({ shapes, setShapes }) => {
   const addImage = debounce((image, isUrl) => {
     const shape = { ...shapesObj["image"], id: uuidv4() };
     shape.url = isUrl ? image : image.urls.small;
-    
+
     setShapes((prevShapes) => [...prevShapes, shape]);
   }, 50);
-
 
   const generateImage = async () => {
     const { data } = await customAxios.post('/openai/generate-image', { prompt: promptValue });

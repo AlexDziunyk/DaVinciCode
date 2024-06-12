@@ -1,5 +1,4 @@
 const User = require('../models/user');
-const { Event } = require('../models/event');
 const generateToken = require('../service/tokenService');
 const { sendConfirmationEmail } = require('../service/emailService');
 const bcrypt = require('bcryptjs');

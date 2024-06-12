@@ -9,7 +9,9 @@
   overflow: auto;
   box-sizing: border-box;
 
-  .toolbar-title {}
+  .toolbar-title {
+    color: #fff;
+  }
 
   .toolbar__tools_item {
     display: flex;
@@ -31,12 +33,64 @@
   .toolbar__images_item {
     width: 100%;
     height: auto;
+
+    img {
+      cursor: pointer;
+    }
+
   }
 
   .toolbar__images_item img {
     width: 100%;
     height: auto;
     object-fit: cover;
+  }
+
+  .toolbar-items {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .square {
+    cursor: pointer;
+    background-color: #cd2424;
+    border: 1px solid #8c4b4b;
+    height: 60px;
+    width: 60px;
+
+  }
+
+  .circle {
+    cursor: pointer;
+    background-color: #cd2424;
+    border: 1px solid #8c4b4b;
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+  }
+
+  .star {
+    height: 60px;
+    width: 60px;
+    cursor: pointer;
+  }
+
+  .upload-file {
+    button {
+      cursor: pointer;
+      border-radius: 20px;
+      background: #FF891B;
+      color: #FFF;
+      font-family: Montserrat;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+      padding: 8px 36px;
+      border: none;
+      margin-bottom: 32px;
+    }
   }
 
 }

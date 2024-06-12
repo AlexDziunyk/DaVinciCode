@@ -1,6 +1,6 @@
 import './App.css';
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, createBrowserRouter, createRoutesFromElements, RouterProvider } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, createBrowserRouter, createRoutesFromElements, RouterProvider, useNavigate } from 'react-router-dom';
 
 import MyBoard from './components/MyBoard/MyBoard';
 import Toolbar from './components/Toolbar/Toolbar';
@@ -15,10 +15,11 @@ function App() {
 
   const router = createBrowserRouter(createRoutesFromElements(
     <Route path="/" element={<RootPage />}>
-      <Route index element={<HomePage />} />
+      <Route element={<HomePage />} />
       <Route path="login" element={<LoginPage />} />
       <Route path="signup" element={<SignUpPage />} />
-      <Route element={<Scene />} />
+      <Route path="projects" element={<SignUpPage />} />
+      <Route index element={<Scene />} />
     </Route>
   ));
 

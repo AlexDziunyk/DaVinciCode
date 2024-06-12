@@ -36,7 +36,7 @@
 
     color: black;
     font-family: Montserrat;
-    font-size: 32px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 500;
     outline: none;
@@ -59,14 +59,14 @@
   }
 
   .toolbar__images {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    display: flex;
+    flex-direction: column;
     gap: 10px;
   }
 
   .toolbar__images_item {
-    width: 100%;
-    height: auto;
+    // width: 100%;
+    // height: auto;
 
     img {
       cursor: pointer;

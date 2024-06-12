@@ -51,8 +51,7 @@ const Toolbar = ({ shapes, setShapes }) => {
   const addImage = debounce((image, isUrl) => {
     const shape = { ...shapesObj["image"], id: uuidv4() };
     shape.url = isUrl ? image : image.urls.small;
-    shape.width = 220;
-    shape.height = 320;
+    
     setShapes((prevShapes) => [...prevShapes, shape]);
   }, 50);
 
@@ -137,7 +136,7 @@ const Toolbar = ({ shapes, setShapes }) => {
           {photos && photos.map(item => {
             return (
               <div className='toolbar__images_item' key={item.id} onClick={() => addImage(item)}>
-                <img width="100%" height="auto" src={item.urls.small}></img>
+                <img src={item.urls.small}></img>
               </div>
             );
           })}
@@ -160,7 +159,7 @@ const Toolbar = ({ shapes, setShapes }) => {
 
       {chosenCategory === "ai" && <div className='ai'>
         <h1 className='toolbar-title'>Uploads</h1>
-        <input value={promptValue} onChange={(e) => setNewPromptValue(e.target.value)} type="text"></input>
+        <input placeholder='Enter here your prompt...' value={promptValue} onChange={(e) => setNewPromptValue(e.target.value)} type="text"></input>
         <button onClick={generateImage}>Generate AI IMage</button>
         {generatedImages && generatedImages.map((item, index) => {
           return (

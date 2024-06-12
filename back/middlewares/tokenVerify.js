@@ -4,7 +4,6 @@ const tokenVerify = (req, res, next) => {
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
 
-  // console.log(process.env.JWT_SECRET, token)
 
   if (token == null) return res.sendStatus(401);
 

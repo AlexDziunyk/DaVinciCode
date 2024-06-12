@@ -8,11 +8,7 @@ const userSchema = new Schema({
   email: { type: String, required: true },
   confirmationToken: { type: String },
   confirmed: { type: Boolean, default: false },
-  notifications: [{
-    title: String,
-    text: String
-  }],
-  role: [{ type: String, enum: ['user'] }]
+  myImages: [String]
 });
 
 const User = mongoose.model('user', userSchema);

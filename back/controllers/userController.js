@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const path = require('path');
 const generateToken = require('../service/tokenService');
 const { sendConfirmationEmail } = require('../service/emailService');
 const bcrypt = require('bcryptjs');
@@ -69,5 +70,36 @@ const loginUser = async (req, res) => {
   }
 };
 
+const uploadMyImage = async (req, res) => {
+  const filePath = req.file ? path.basename(req.file.path) : "event.jpg";
+  const { login } = req.login;
 
-module.exports = { createUser, loginUser };
+  try {
+    const user = await User.findOne({ login: login });
+    const finalFilePath = "http://localhost:3001/uploads/" + filePath;
+    user.myImages.push(finalFilePath);
+    await user.save();
+
+    return res.status(200).json({ message: "Successfully loaded image!" });
+  } catch (error) {
+    return res.status(500).json({ message: "Error with loading an image" });
+  }
+
+}
+
+const getUploadedImages = async (req, res) => {
+  const { login } = req.login;
+
+  try {
+    const user = await User.findOne({ login: login });
+
+    return res.status(200).json({ message: "Successfully got images!", result: user.myImages });
+
+  } catch (error) {
+    return res.status(500).json({ message: "Error with getting images" });
+  }
+
+}
+
+
+module.exports = { createUser, loginUser, uploadMyImage, getUploadedImages };

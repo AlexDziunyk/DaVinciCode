@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const mongoose = require('mongoose');
+const path = require('path');
 require('dotenv').config();
 
 const mongoDB = process.env.MONGODB;
@@ -17,6 +18,7 @@ mongoose.connect(mongoDB)
 
 app.use(cors());
 app.use(express.json());
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use('/api/openai', openaiRoutes);
 app.use('/api/user', userRoutes);

@@ -1,11 +1,22 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import design1 from '../../assets/design1.png';
 import design2 from '../../assets/design2.png';
 import design3 from '../../assets/design3.png';
 import './style.scss';
+import { useAuth } from '../../context/AuthContext';
 
 const Home = () => {
+
+  const { isLoggedIn } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate("/login");
+    }
+  }, []);
+
   return (
     <div className="home-container">
       <main>

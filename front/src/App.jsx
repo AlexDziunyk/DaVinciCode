@@ -9,7 +9,7 @@ import HomePage from './pages/HomeScene/HomeScene';
 import LoginPage from './pages/LoginScene/LoginScene';
 import SignUpPage from './pages/SignUpScene/SignUpScene';
 import RootPage from './pages/RootPage/RootPage';
-import axios from './axios/axios';
+import { AuthProvider } from './context/AuthContext';
 
 function App() {
 
@@ -25,7 +25,9 @@ function App() {
 
   return (
     <div className='app'>
-      <RouterProvider router={router} />
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
     </div>
   );
 }

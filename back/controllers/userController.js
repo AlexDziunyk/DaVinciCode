@@ -1,5 +1,4 @@
 const User = require('../models/user');
-const { Event } = require('../models/event');
 const generateToken = require('../service/tokenService');
 const { sendConfirmationEmail } = require('../service/emailService');
 const bcrypt = require('bcryptjs');
@@ -23,12 +22,12 @@ const createUser = async (req, res) => {
       email: email,
     });
 
-    const confirmationToken = generateToken();
-    user.confirmationToken = confirmationToken;
+    //const confirmationToken = generateToken();
+    //user.confirmationToken = confirmationToken;
 
     const result = await user.save();
 
-    await sendConfirmationEmail(email, confirmationToken);
+    //await sendConfirmationEmail(email, confirmationToken);
 
     // const secretKey = "sdpofmsflklkj34jj6klkljal";
     // console.log('Debug test secret key:', secretKey);

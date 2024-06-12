@@ -22,30 +22,6 @@ function App() {
     </Route>
   ));
 
-  const testApi = async () => {
-    const result = await axios.post("/user/register", {
-      login: "alex",
-      password: "pass",
-      email: "alexdziunyk@gmail.com"
-    });
-
-    console.log(result);
-
-  }
-
-  const login = async () => {
-    const result = await axios.post("/user/login", {
-      login: "alex",
-      password: "pass",
-    });
-
-    console.log(result);
-
-  }
-
-  useEffect(() => {
-    login()
-  }, []);
 
   return (
     <div className='app'>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { HexColorPicker } from "react-colorful";
 import Slider from '@mui/material/Slider';
+import borders from '../../../assets/borders.svg';
 import './toolbars.scss';
 
 const ShapesToolbar = ({ selectedShape, onChange }) => {
@@ -34,7 +35,9 @@ const ShapesToolbar = ({ selectedShape, onChange }) => {
           onChange({ ...selectedShape, fill: newColor })
         }} />
       </div>}
-      <div onClick={() => setIsBorderActive(true)} className='border-box'></div>
+      
+      <img onClick={() => setIsBorderActive(true)} src={borders} alt='borders' style={{cursor: "pointer"}}></img>
+      
       {isBorderActive && <div className='border__container'>
         <div className='sliders'>
           <p className='slider__title'>Border Radius</p>

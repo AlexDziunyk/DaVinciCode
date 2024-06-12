@@ -9,6 +9,40 @@
   overflow: auto;
   box-sizing: border-box;
 
+  button {
+    cursor: pointer;
+    border-radius: 20px;
+    background: #FF891B;
+    color: #FFF;
+    font-family: Montserrat;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    padding: 8px 36px;
+    border: none;
+    margin-bottom: 32px;
+    width: 100%;
+
+  }
+
+  input {
+    border-radius: 20px;
+    border: 1px solid #A8A5A5;
+    background: #FFF;
+    width: 100%;
+    padding: 4px 8px;
+    box-sizing: border-box;
+
+    color: black;
+    font-family: Montserrat;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 500;
+    outline: none;
+    margin-bottom: 20px;
+  }
+
   .toolbar-title {
     color: #fff;
   }
@@ -76,21 +110,8 @@
     cursor: pointer;
   }
 
-  .upload-file {
-    button {
-      cursor: pointer;
-      border-radius: 20px;
-      background: #FF891B;
-      color: #FFF;
-      font-family: Montserrat;
-      font-size: 20px;
-      font-style: normal;
-      font-weight: 500;
-      line-height: normal;
-      padding: 8px 36px;
-      border: none;
-      margin-bottom: 32px;
-    }
-  }
+  .upload-file {}
+
+  .ai {}
 
 }

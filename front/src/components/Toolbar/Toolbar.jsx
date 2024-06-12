@@ -158,8 +158,8 @@ const Toolbar = ({ shapes, setShapes }) => {
         })}
       </div>}
 
-      {chosenCategory === "ai" && <div>
-        <p className='toolbar-title'>Uploads</p>
+      {chosenCategory === "ai" && <div className='ai'>
+        <h1 className='toolbar-title'>Uploads</h1>
         <input value={promptValue} onChange={(e) => setNewPromptValue(e.target.value)} type="text"></input>
         <button onClick={generateImage}>Generate AI IMage</button>
         {generatedImages && generatedImages.map((item, index) => {

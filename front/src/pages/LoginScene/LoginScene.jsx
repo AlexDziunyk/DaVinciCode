@@ -5,7 +5,6 @@ import imagelogin2 from '../../assets/LoginSignup/twitter-alt-circle_12107562.pn
 import imagelogin3 from '../../assets/LoginSignup/facebook_145802.png';
 import imagelogin4 from '../../assets/LoginSignup/linkedin_145807.png';
 
-
 const Login = () => {
   return (
     <div className="login-container">
@@ -26,8 +25,10 @@ const Login = () => {
         <div className="signup-link">
           Don't have an account? <a href="/signup">Signup</a>
         </div>
+        <div className="divider">
+        <span>or</span>
+      </div>
         <div className="social-login">
-          <p>or</p>
           <div className="social-buttons">
           <a className="google-login-button" href="-" target="_blank"><img src={imagelogin1} alt="none" /></a>
           <a className="twitter-login-button" href="-" target="_blank"><img src={imagelogin2} alt="none" /></a>

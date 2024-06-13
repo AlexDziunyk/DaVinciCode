@@ -17,7 +17,6 @@
   text-align: center;
   max-width: 400px;
   width: 400px;
-  height: 550px;
   flex-shrink: 0;
   border-radius: 30px;
   background: #FFF;
@@ -32,60 +31,36 @@
   font-size: 32px;
   font-style: normal;
   font-weight: 800;
-  line-height: 60px; /* 187.5% */
+  line-height: 60px;
+  /* 187.5% */
   letter-spacing: 3.2px;
 }
 
-.input-group
-{
+.input-group {
   margin-bottom: 20px;
-}
-.input-group input[type="email"] {
-  color: #D9D9D9;
-  font-family: Montserrat;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 60px; /* 300% */
-  width: 300px;
-  height: 60px;
-  flex-shrink: 0;
-  border-radius: 20px;
-  border: 1px solid #A8A5A5;
-  background: #FFF;
+
+  input {
+    outline: none;
+    color: black;
+    font-family: Montserrat;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    width: 300px;
+    height: 60px;
+    flex-shrink: 0;
+    border-radius: 20px;
+    border: 1px solid #A8A5A5;
+    background: #FFF;
+  }
+
 }
 
-.input-group input[type="password"] {
-  color: #D9D9D9;
-  font-family: Montserrat;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 60px; /* 300% */
-  width: 300px;
-  height: 60px;
-  flex-shrink: 0;
-  border-radius: 20px;
-  border: 1px solid #A8A5A5;
-  background: #FFF;
-}
-
-.input-group input[type="confirmpassword"] {
-  color: #D9D9D9;
-  font-family: Montserrat;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 60px; /* 300% */
-  width: 300px;
-  height: 60px;
-  flex-shrink: 0;
-  border-radius: 20px;
-  border: 1px solid #A8A5A5;
-  background: #FFF;
-}
 
 .signup-button {
+  cursor: pointer;
+  border: none;
+  transition: 0.3s;
   width: 300px;
   height: 60px;
   flex-shrink: 0;
@@ -97,7 +72,8 @@
   font-size: 20px;
   font-style: normal;
   font-weight: 500;
-  line-height: 60px; /* 300% */
+  line-height: 60px;
+  /* 300% */
 }
 
 .signup-button:hover {
@@ -110,7 +86,8 @@
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
-  line-height: 60px; /* 500% */
+  line-height: 60px;
+  /* 500% */
 }
 
 .login-link a {
@@ -119,7 +96,8 @@
   font-size: 12px;
   font-style: normal;
   font-weight: 600;
-  line-height: 60px; /* 500% */
+  line-height: 60px;
+  /* 500% */
   letter-spacing: 1.2px;
   text-decoration: none;
 }
@@ -138,20 +116,20 @@
   font-style: normal;
   font-weight: 400;
   letter-spacing: 1.2px;
-  margin-top: 0px; 
+  margin-top: 0px;
 }
 
 .social-buttons {
   display: flex;
   justify-content: space-between;
-  
+
 }
 
 .google-login-button {
   width: 45px;
   height: 45px;
   flex-shrink: 0;
-  }
+}
 
 .twitter-login-button {
   width: 45px;
@@ -174,7 +152,8 @@
 .divider {
   color: #A8A5A5;
   font-family: Montserrat;
-  line-height: 60px; /* 500% */
+  line-height: 60px;
+  /* 500% */
   letter-spacing: 1.2px;
   display: flex;
   align-items: center;

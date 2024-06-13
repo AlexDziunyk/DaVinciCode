@@ -7,9 +7,9 @@ const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 
 const createUser = async (req, res) => {
-
   const { login, password, email } = req.body;
   const hashedPassword = await bcrypt.hash(password, 10);
+  
   try {
     const existingUser = await User.findOne({ login });
     if (existingUser) {
@@ -63,10 +63,10 @@ const loginUser = async (req, res) => {
 
     const token = jwt.sign({ userId: user._id, login: user.login }, process.env.JWT_SECRET, { expiresIn: '3d' });
 
-    res.status(200).json({ message: 'Login successful', token });
+    return res.status(200).json({ message: 'Login successful', token });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Server error' });
+    return res.status(500).json({ error: 'Server error' });
   }
 };
 

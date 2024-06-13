@@ -21,9 +21,6 @@ app.use(cors());
 app.use(express.json());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-mongoose.connect(mongoDB)
-  .then(result => console.log("connected to db"))
-  .catch(e => console.log(e));
 
 app.get('/confirm', async (req, res) => {
   const { token } = req.query;
@@ -46,8 +43,6 @@ app.get('/confirm', async (req, res) => {
   }
 });
 
-app.use('/api/users', userRoutes);
-app.use('/api/notifications', notificationRoutes);
 app.use('/api/openai', openaiRoutes);
 app.use('/api/user', userRoutes);
 

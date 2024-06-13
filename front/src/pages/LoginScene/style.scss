@@ -17,12 +17,10 @@
   text-align: center;
   max-width: 400px;
   width: 400px;
-  height: 550px;
   flex-shrink: 0;
   border-radius: 30px;
   background: #FFF;
   box-shadow: 4px 7px 4px 0px rgba(0, 0, 0, 0.25);
-  
 }
 
 .login-box h2 {
@@ -33,53 +31,42 @@
   font-size: 32px;
   font-style: normal;
   font-weight: 800;
-  line-height: 60px; /* 187.5% */
+  line-height: 60px;
+  /* 187.5% */
   letter-spacing: 3.2px;
 }
 
 .input-group
 {
   margin-bottom: 20px;
+
+  input {
+    outline: none;
+    color: black;
+    font-family: Montserrat;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    width: 300px;
+    height: 60px;
+    flex-shrink: 0;
+    border-radius: 20px;
+    border: 1px solid #A8A5A5;
+    background: #FFF;
+  }
+
 }
 
-.input-group input[type="email"] {
-  color: #D9D9D9;
-  font-family: Montserrat;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 60px; /* 300% */
-  width: 300px;
-  height: 60px;
-  flex-shrink: 0;
-  border-radius: 20px;
-  border: 1px solid #A8A5A5;
-  background: #FFF;
-}
-
-.input-group input[type="password"] {
-  color: #D9D9D9;
-  font-family: Montserrat;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 60px; /* 300% */
-  width: 300px;
-  height: 60px;
-  flex-shrink: 0;
-  border-radius: 20px;
-  border: 1px solid #A8A5A5;
-  background: #FFF;
-}
 
 .forgot-password {
   color: #1B92FF;
-font-family: Montserrat;
-font-size: 12px;
-font-style: normal;
-font-weight: 600;
-line-height: 60px; /* 500% */
-letter-spacing: 1.2px;
+  font-family: Montserrat;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 60px;
+  /* 500% */
+  letter-spacing: 1.2px;
 }
 
 .forgot-password a {
@@ -92,6 +79,8 @@ letter-spacing: 1.2px;
 }
 
 .login-button {
+  cursor: pointer;
+  border: none;
   width: 300px;
   height: 60px;
   flex-shrink: 0;
@@ -103,7 +92,9 @@ letter-spacing: 1.2px;
   font-size: 20px;
   font-style: normal;
   font-weight: 500;
-  line-height: 60px; /* 300% */
+  line-height: 60px;
+  transition: 0.3s;
+  /* 300% */
 }
 
 .login-button:hover {
@@ -116,7 +107,8 @@ letter-spacing: 1.2px;
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
-  line-height: 60px; /* 500% */
+  line-height: 60px;
+  /* 500% */
 }
 
 .signup-link a {
@@ -125,7 +117,8 @@ letter-spacing: 1.2px;
   font-size: 12px;
   font-style: normal;
   font-weight: 600;
-  line-height: 60px; /* 500% */
+  line-height: 60px;
+  /* 500% */
   letter-spacing: 1.2px;
   text-decoration: none;
 }
@@ -137,14 +130,13 @@ letter-spacing: 1.2px;
 .social-buttons {
   display: flex;
   justify-content: space-between;
-  
 }
 
 .google-login-button {
   width: 45px;
   height: 45px;
   flex-shrink: 0;
-  }
+}
 
 .twitter-login-button {
   width: 45px;
@@ -171,7 +163,8 @@ letter-spacing: 1.2px;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
-  line-height: 60px; /* 500% */
+  line-height: 60px;
+  /* 500% */
   letter-spacing: 1.2px;
 }
 

@@ -3,7 +3,7 @@
   flex-direction: row;
   align-items: center;
   padding: 5px;
-  gap: 2px;
+  gap: 10px;
   height: 30px;
 
   .color-picker {
@@ -11,18 +11,21 @@
     z-index: 15;
     top: 8px;
   }
+
   .color-box {
-    border: 1px solid black;
+    border: 0.5px solid #8A8989;
     cursor: pointer;
     width: 20px;
     height: 20px;
   }
+
   .border-box {
     border: 1px solid black;
     cursor: pointer;
     width: 20px;
     height: 20px;
   }
+
   .border__container {
     position: absolute;
     width: 300px;
@@ -56,9 +59,55 @@
   }
 
   .font-size {
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+    align-items: center;
+
     input {
-      width: 40px;
+      width: 20px;
+      height: 20px;
       text-align: center;
+      border: 0.5px solid #8A8989;
+      background: #FFF;
+
+      color: #000;
+      font-family: Montserrat;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+    }
+
+    .font-size__button_left {
+      cursor: pointer;
+      width: 20px;
+      height: 20px;
+
+      border-radius: 5px 0px 0px 5px;
+      border: 0.5px solid #8A8989;
+      background: #FFF;
+
+      color: #000;
+      font-family: Montserrat;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+    }
+
+    .font-size__button_right {
+      cursor: pointer;
+      width: 20px;
+      height: 20px;
+
+      border-radius: 0px 5px 5px 0px;
+      border: 0.5px solid #8A8989;
+      background: #FFF;
+
+      color: #000;
+      font-family: Montserrat;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
     }
 
   }
@@ -108,6 +157,17 @@
 
   .fonts__item {
     cursor: pointer;
+  }
+
+  .font-input {
+    border-radius: 5px;
+    border: 0.5px solid #8A8989;
+    background: #FFF;
+    color: #000;
+    font-family: Montserrat;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
   }
 
 }

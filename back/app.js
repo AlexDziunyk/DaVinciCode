@@ -6,13 +6,16 @@ const path = require('path');
 require('dotenv').config();
 const User = require('./models/user');
 
-const userRoutes = require('./routes/userRoutes');
+const mongoDB = process.env.MONGODB;
+
 const openaiRoutes = require('./routes/openaiRoutes');
-const notificationRoutes = require('./routes/notificationsRoutes');
+const userRoutes = require('./routes/userRoutes');
 
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
-const mongoDB = "";
+mongoose.connect(mongoDB)
+  .then(result => console.log("connected to db"))
+  .catch(e => console.log(e));
+
 
 app.use(cors());
 app.use(express.json());
@@ -46,6 +49,7 @@ app.get('/confirm', async (req, res) => {
 app.use('/api/users', userRoutes);
 app.use('/api/notifications', notificationRoutes);
 app.use('/api/openai', openaiRoutes);
+app.use('/api/user', userRoutes);
 
 app.listen(3001, () => {
   console.log("Listening");

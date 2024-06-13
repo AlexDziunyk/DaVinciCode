@@ -57,7 +57,7 @@ const TextToolbar = ({ selectedShape, onChange }) => {
     }
   }, [selectedShape]);
 
-  
+
   useEffect(() => {
     const bold = isBold ? "bold" : "";
     const italics = isItalics ? "italic" : "";
@@ -80,7 +80,7 @@ const TextToolbar = ({ selectedShape, onChange }) => {
 
   return (
     <>
-      <input onClick={() => setIsFontFamilyActive(true)}  value={fontFamily} readOnly></input>
+      <input  className='font-input' onClick={() => setIsFontFamilyActive(true)} value={fontFamily} readOnly></input>
       {isFontFamilyActive && <div className='fonts'>
         {fontsArr.map((item, index) => {
           return <div onClick={() => {
@@ -89,7 +89,7 @@ const TextToolbar = ({ selectedShape, onChange }) => {
         })}
       </div>}
       <div className='font-size'>
-        <button onClick={() => {
+        <button className='font-size__button_left' onClick={() => {
           if (fontSize <= 2) {
             setFontSize(2);
           } else {
@@ -107,7 +107,7 @@ const TextToolbar = ({ selectedShape, onChange }) => {
           const newValue = e.target.value;
           setFontSize(newValue);
         }}></input>
-        <button onClick={() => {
+        <button className='font-size__button_right' onClick={() => {
           if (fontSize >= 200) {
             setFontSize(2);
           } else {

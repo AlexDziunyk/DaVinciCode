@@ -8,16 +8,8 @@ const userSchema = new Schema({
   email: { type: String, required: true, unique: true },
   confirmationToken: { type: String },
   confirmed: { type: Boolean, default: false },
-  notifications: [{
-    title: String,
-    text: String
-  }],
-  role: { type: String, enum: ['user'], default: 'user' },
-  boards: [{ type: Schema.Types.ObjectId, ref: 'Board' }],
-  uploadedImages: [{ type: Schema.Types.ObjectId, ref: 'Image' }],
-  aiGeneratedImages: [{ type: Schema.Types.ObjectId, ref: 'Image' }]
-}, {
-  timestamps: true
+  myImages: [String],
+  aiImages: [String]
 });
 
 const User = mongoose.model('User', userSchema);

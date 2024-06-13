@@ -55,6 +55,9 @@ export const shapesObj = {
     id: uuidv4(),
   },
   image: {
+    stroke: "#8c4b4b",
+    strokeWidth: 0,
+    cornerRadius: 0,
     type: "image",
     url: "",
     x: (window.innerWidth - 500) / 2,

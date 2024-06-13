@@ -12,6 +12,7 @@ import textIcon from '../../assets/toolbar/Text.svg';
 import uploadIcon from '../../assets/toolbar/Uploads.svg';
 import star from '../../assets/toolbar/star.png';
 import { textsArr } from '../../utils/textsArr';
+import Popup from '../Popup/Popup';
 
 
 const Toolbar = ({ shapes, setShapes }) => {
@@ -19,7 +20,7 @@ const Toolbar = ({ shapes, setShapes }) => {
   const [chosenCategory, setChosenCategory] = useState("shapes");
   const [photos, setPhotos] = useState([]);
   const [uploadedFiles, setUploadedFiles] = useState([]);
-  //const [newUploadedFile, setNewUploadedFile] = useState("");
+  const [isPopupOpened, setIsPopupOpened] = useState(false);
   const [promptValue, setNewPromptValue] = useState("");
   const [generatedImages, setGeneratedImages] = useState([]);
   const uploadInputRef = useRef(null);
@@ -86,8 +87,25 @@ const Toolbar = ({ shapes, setShapes }) => {
 
   const generateImage = async () => {
     const { data } = await customAxios.post('/openai/generate-image', { prompt: promptValue });
+    
+    let result = "";
 
-    setGeneratedImages(prev => [data.result, ...prev]);
+    if (data.result) {
+      result = data.result
+    }
+
+    return result;
+  }
+
+  const acceptGeneratedImage = async (imageUrl) => {
+    const { data } = await customAxios.post('/user/upload/aiimages', { image: imageUrl });
+
+    if (data.result) {
+      setGeneratedImages(prev => [imageUrl, ...prev]);
+    }
+
+    setIsPopupOpened(false);
+    setNewPromptValue("");
   }
 
   const fetchPhotos = async () => {
@@ -116,93 +134,99 @@ const Toolbar = ({ shapes, setShapes }) => {
 
 
   return (
-    <div className='toolbar'>
-      <div className='toolbar__tools'>
-        <div onClick={() => setChosenCategory("shapes")} className='toolbar__tools_item'>
-          <img src={elementsIcon} alt='elementsIcon'></img>
+    <>
+      {isPopupOpened && <Popup onAccept={acceptGeneratedImage} onClick={generateImage} setInputValue={(e) => setNewPromptValue(e.target.value)} onClose={() => setIsPopupOpened(false)} />}
+
+      <div className='toolbar'>
+        <div className='toolbar__tools'>
+          <div onClick={() => setChosenCategory("shapes")} className='toolbar__tools_item'>
+            <img src={elementsIcon} alt='elementsIcon'></img>
+          </div>
+          <div onClick={() => setChosenCategory("images")} className='toolbar__tools_item'>
+            <img src={imagesIcon} alt='imagesIcon'></img>
+          </div>
+          <div onClick={() => setChosenCategory("text")} className='toolbar__tools_item'>
+            <img src={textIcon} alt='textIcon'></img>
+          </div>
+          <div onClick={() => setChosenCategory("upload")} className='toolbar__tools_item'>
+            <img src={uploadIcon} alt='uploadIcon'></img>
+          </div>
+          <div onClick={() => setChosenCategory("ai")} className='toolbar__tools_item'>
+            <img src={aiIcon} alt='aiIcon'></img>
+          </div>
         </div>
-        <div onClick={() => setChosenCategory("images")} className='toolbar__tools_item'>
-          <img src={imagesIcon} alt='imagesIcon'></img>
-        </div>
-        <div onClick={() => setChosenCategory("text")} className='toolbar__tools_item'>
-          <img src={textIcon} alt='textIcon'></img>
-        </div>
-        <div onClick={() => setChosenCategory("upload")} className='toolbar__tools_item'>
-          <img src={uploadIcon} alt='uploadIcon'></img>
-        </div>
-        <div onClick={() => setChosenCategory("ai")} className='toolbar__tools_item'>
-          <img src={aiIcon} alt='aiIcon'></img>
-        </div>
+
+        {chosenCategory === "shapes" && <div className='toolbar__shapes'>
+          <h1 className='toolbar-title'>Shapes</h1>
+          <div className='toolbar-items'>
+            <div className='square' onClick={() => addShape("rect")}></div>
+            <div className='circle' onClick={() => addShape("circle")}></div>
+            <div onClick={() => addShape("star")}><img className='star' src={star} alt='star'></img></div>
+          </div>
+        </div>}
+
+        {chosenCategory === "text" && <div className='toolbar__shapes'>
+          <h1 className='toolbar-title'>Texts</h1>
+          <div className='toolbar-items'>
+            {textsArr.map(item => {
+              return (
+                <div
+                  key={item.id}
+                  onClick={() => addText(item)}
+                  style={{ cursor: "pointer", fontFamily: item.fontFamily, color: item.fill, fontSize: item.fontSize }}>
+                  {item.text}
+                </div>
+              );
+            })}
+          </div>
+        </div>}
+
+        {chosenCategory === "images" && <div>
+          <h1 className='toolbar-title'>Images</h1>
+          <div className='toolbar__images'>
+            {photos && photos.map(item => {
+              return (
+                <div className='toolbar__images_item' key={item.id} onClick={() => addImage(item)}>
+                  <img src={item.urls.small}></img>
+                </div>
+              );
+            })}
+          </div>
+        </div>}
+
+        {chosenCategory === "upload" && <div className='upload-file'>
+          <h1 className='toolbar-title'>Uploads</h1>
+          <input onChange={handleInputChange} ref={uploadInputRef} hidden type="file"></input>
+          <button onClick={() => {
+            uploadInputRef.current.click();
+          }}>Upload image</button>
+          {uploadedFiles && uploadedFiles.map((item, index) => {
+            return (
+              <div className='toolbar__images_item' key={index} onClick={() => addImage(item, true)}>
+                <img width="100%" height="auto" src={item}></img>
+              </div>
+            )
+          })}
+        </div>}
+
+        {chosenCategory === "ai" && <div className='ai'>
+          <h1 className='toolbar-title'>Ai Images</h1>
+          {/* <input placeholder='Enter here your prompt...' value={promptValue} onChange={(e) => setNewPromptValue(e.target.value)} type="text"></input> */}
+          {/* <button onClick={generateImage}>Generate AI Image</button> */}
+          <button onClick={() => setIsPopupOpened(true)}>Generate AI Image</button>
+          {generatedImages && generatedImages.map((item, index) => {
+            return (
+              <div className='toolbar__images_item' key={index} onClick={() => addImage(item, true)}>
+                <img width={40} height={60} src={item}></img>
+              </div>
+            )
+          })}
+        </div>}
+
+
       </div>
-
-      {chosenCategory === "shapes" && <div className='toolbar__shapes'>
-        <h1 className='toolbar-title'>Shapes</h1>
-        <div className='toolbar-items'>
-          <div className='square' onClick={() => addShape("rect")}></div>
-          <div className='circle' onClick={() => addShape("circle")}></div>
-          <div onClick={() => addShape("star")}><img className='star' src={star} alt='star'></img></div>
-        </div>
-      </div>}
-
-      {chosenCategory === "text" && <div className='toolbar__shapes'>
-        <h1 className='toolbar-title'>Texts</h1>
-        <div className='toolbar-items'>
-          {textsArr.map(item => {
-            return (
-              <div
-                key={item.id}
-                onClick={() => addText(item)}
-                style={{ cursor: "pointer", fontFamily: item.fontFamily, color: item.fill, fontSize: item.fontSize }}>
-                {item.text}
-              </div>
-            );
-          })}
-        </div>
-      </div>}
-
-      {chosenCategory === "images" && <div>
-        <h1 className='toolbar-title'>Images</h1>
-        <div className='toolbar__images'>
-          {photos && photos.map(item => {
-            return (
-              <div className='toolbar__images_item' key={item.id} onClick={() => addImage(item)}>
-                <img src={item.urls.small}></img>
-              </div>
-            );
-          })}
-        </div></div>}
-
-      {chosenCategory === "upload" && <div className='upload-file'>
-        <h1 className='toolbar-title'>Uploads</h1>
-        <input onChange={handleInputChange} ref={uploadInputRef} hidden type="file"></input>
-        <button onClick={() => {
-          uploadInputRef.current.click();
-        }}>Upload image</button>
-        {uploadedFiles && uploadedFiles.map((item, index) => {
-          return (
-            <div className='toolbar__images_item' key={index} onClick={() => addImage(item, true)}>
-              <img width="100%" height="auto" src={item}></img>
-            </div>
-          )
-        })}
-      </div>}
-
-      {chosenCategory === "ai" && <div className='ai'>
-        <h1 className='toolbar-title'>Ai Images</h1>
-        <input placeholder='Enter here your prompt...' value={promptValue} onChange={(e) => setNewPromptValue(e.target.value)} type="text"></input>
-        <button onClick={generateImage}>Generate AI Image</button>
-        {generatedImages && generatedImages.map((item, index) => {
-          return (
-            <div className='toolbar__images_item' key={index} onClick={() => addImage(item, true)}>
-              <img width={40} height={60} src={item}></img>
-            </div>
-          )
-        })}
-      </div>}
-
-
-    </div>
+    </>
   )
 }
 
-export default Toolbar
+export default Toolbar;

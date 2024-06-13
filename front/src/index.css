@@ -5,3 +5,11 @@ body {
   font-family: "Roboto", sans-serif;
 }
 
+.link {
+  text-decoration: none;
+}
+
+.error {
+  color: rgb(185, 43, 43);
+  font-style: 18px;
+}

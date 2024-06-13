@@ -4,10 +4,14 @@ import './style.scss';
 import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import customAxios from '../../axios/axios';
-import shapesImg from '../../assets/shapes.svg';
-import imagesImg from '../../assets/images.svg';
-import { FaCloudUploadAlt } from "react-icons/fa";
-import { FaRobot } from "react-icons/fa";
+
+import imagesIcon from '../../assets/toolbar/Images.svg';
+import aiIcon from '../../assets/toolbar/Ai.svg';
+import elementsIcon from '../../assets/toolbar/Elements.svg';
+import textIcon from '../../assets/toolbar/Text.svg';
+import uploadIcon from '../../assets/toolbar/Uploads.svg';
+import star from '../../assets/toolbar/star.png';
+import { textsArr } from '../../utils/textsArr';
 
 
 const Toolbar = ({ shapes, setShapes }) => {
@@ -15,7 +19,7 @@ const Toolbar = ({ shapes, setShapes }) => {
   const [chosenCategory, setChosenCategory] = useState("shapes");
   const [photos, setPhotos] = useState([]);
   const [uploadedFiles, setUploadedFiles] = useState([]);
-  const [newUploadedFile, setNewUploadedFile] = useState("");
+  //const [newUploadedFile, setNewUploadedFile] = useState("");
   const [promptValue, setNewPromptValue] = useState("");
   const [generatedImages, setGeneratedImages] = useState([]);
   const uploadInputRef = useRef(null);
@@ -28,53 +32,84 @@ const Toolbar = ({ shapes, setShapes }) => {
     };
   };
 
-  const handleInputChange = (e) => {
-    const file = e.target.files[0];
-    setUploadedFiles(prev => [URL.createObjectURL(file), ...prev])
+  const getUploadedImages = async () => {
+    const { data } = await customAxios.get("/user/myimages");
+
+    console.log(data)
+
+    setUploadedFiles(data.result);
+
   }
 
+  const getAiImages = async () => {
+    const { data } = await customAxios.get("/user/aiimages");
+
+    console.log(data)
+
+    setGeneratedImages(data.result);
+
+  }
+
+  const uploadMyImage = async (fileImage) => {
+    const formData = new FormData();
+    formData.append('image', fileImage);
+
+    const response = await customAxios.post('/user/upload/myimages', formData);
+
+    console.log(response)
+
+  }
+
+  const handleInputChange = async (e) => {
+    const file = e.target.files[0];
+    setUploadedFiles(prev => [URL.createObjectURL(file), ...prev]);
+
+    uploadMyImage(file);
+  }
 
   const addShape = debounce((type) => {
     const shape = { ...shapesObj[type], id: uuidv4() };
     setShapes((prevShapes) => [...prevShapes, shape]);
   }, 50);
 
-  const addImage = debounce((image, isUrl) => {
-    const shape = { ...shapesObj["image"], id: uuidv4() };
-    shape.url = isUrl ? image : image.urls.small;
-    shape.width = 220;
-    shape.height = 320;
+  const addText = debounce((properties) => {
+    const shape = { ...properties, id: uuidv4() };
     setShapes((prevShapes) => [...prevShapes, shape]);
   }, 50);
 
+  const addImage = debounce((image, isUrl) => {
+    const shape = { ...shapesObj["image"], id: uuidv4() };
+    shape.url = isUrl ? image : image.urls.small;
 
-  const generateImage = async() => {
+    setShapes((prevShapes) => [...prevShapes, shape]);
+  }, 50);
+
+  const generateImage = async () => {
     const { data } = await customAxios.post('/openai/generate-image', { prompt: promptValue });
 
-    console.log(data.result);
-
     setGeneratedImages(prev => [data.result, ...prev]);
-
   }
 
-  useEffect(() => {
-    const fetchPhotos = async () => {
-      try {
-        const response = await axios.get('https://api.unsplash.com/photos', {
-          headers: {
-            Authorization: `Client-ID qmN4vxfH1dY-dJJSssRwFtjRUHm6-gLVBP11NVxMGEQ`
-          },
-          params: {
-            per_page: 16
-          }
-        });
-        setPhotos(response.data);
-        console.log(response.data)
-      } catch (error) {
-        console.error('Error fetching photos from Unsplash', error);
-      }
-    };
+  const fetchPhotos = async () => {
+    try {
+      const response = await axios.get('https://api.unsplash.com/photos', {
+        headers: {
+          Authorization: `Client-ID qmN4vxfH1dY-dJJSssRwFtjRUHm6-gLVBP11NVxMGEQ`
+        },
+        params: {
+          per_page: 16
+        }
+      });
+      setPhotos(response.data);
+      console.log(response.data)
+    } catch (error) {
+      console.error('Error fetching photos from Unsplash', error);
+    }
+  };
 
+  useEffect(() => {
+    getUploadedImages();
+    getAiImages();
     fetchPhotos();
   }, []);
 
@@ -84,58 +119,78 @@ const Toolbar = ({ shapes, setShapes }) => {
     <div className='toolbar'>
       <div className='toolbar__tools'>
         <div onClick={() => setChosenCategory("shapes")} className='toolbar__tools_item'>
-          <img src={shapesImg} alt='shapesImg' width={24} height={24}></img>
+          <img src={elementsIcon} alt='elementsIcon'></img>
         </div>
         <div onClick={() => setChosenCategory("images")} className='toolbar__tools_item'>
-          <img src={imagesImg} alt='imagesImg' width={24} height={24}></img>
+          <img src={imagesIcon} alt='imagesIcon'></img>
+        </div>
+        <div onClick={() => setChosenCategory("text")} className='toolbar__tools_item'>
+          <img src={textIcon} alt='textIcon'></img>
         </div>
         <div onClick={() => setChosenCategory("upload")} className='toolbar__tools_item'>
-          <FaCloudUploadAlt />
+          <img src={uploadIcon} alt='uploadIcon'></img>
         </div>
         <div onClick={() => setChosenCategory("ai")} className='toolbar__tools_item'>
-          <FaRobot />
+          <img src={aiIcon} alt='aiIcon'></img>
         </div>
       </div>
 
       {chosenCategory === "shapes" && <div className='toolbar__shapes'>
-        <p className='toolbar-title'>Shapes</p>
+        <h1 className='toolbar-title'>Shapes</h1>
         <div className='toolbar-items'>
-          <h1 onClick={() => addShape("rect")}>Square</h1>
-          <h1 onClick={() => addShape("circle")}>Circle</h1>
-          <h1 onClick={() => addShape("star")}>Star</h1>
-          <h1 onClick={() => addShape("text")}>Text</h1>
+          <div className='square' onClick={() => addShape("rect")}></div>
+          <div className='circle' onClick={() => addShape("circle")}></div>
+          <div onClick={() => addShape("star")}><img className='star' src={star} alt='star'></img></div>
         </div>
       </div>}
 
-      {chosenCategory === "images" && <div className='toolbar__images'>
-        {photos && photos.map(item => {
-          return (
-            <div className='toolbar__images_item' key={item.id} onClick={() => addImage(item)}>
-              <img width={40} height={60} src={item.urls.small}></img>
-            </div>
-          );
-        })}
+      {chosenCategory === "text" && <div className='toolbar__shapes'>
+        <h1 className='toolbar-title'>Texts</h1>
+        <div className='toolbar-items'>
+          {textsArr.map(item => {
+            return (
+              <div
+                key={item.id}
+                onClick={() => addText(item)}
+                style={{ cursor: "pointer", fontFamily: item.fontFamily, color: item.fill, fontSize: item.fontSize }}>
+                {item.text}
+              </div>
+            );
+          })}
+        </div>
       </div>}
 
-      {chosenCategory === "upload" && <div>
-        <p className='toolbar-title'>Uploads</p>
-        <input value={newUploadedFile} onChange={handleInputChange} ref={uploadInputRef} hidden type="file"></input>
+      {chosenCategory === "images" && <div>
+        <h1 className='toolbar-title'>Images</h1>
+        <div className='toolbar__images'>
+          {photos && photos.map(item => {
+            return (
+              <div className='toolbar__images_item' key={item.id} onClick={() => addImage(item)}>
+                <img src={item.urls.small}></img>
+              </div>
+            );
+          })}
+        </div></div>}
+
+      {chosenCategory === "upload" && <div className='upload-file'>
+        <h1 className='toolbar-title'>Uploads</h1>
+        <input onChange={handleInputChange} ref={uploadInputRef} hidden type="file"></input>
         <button onClick={() => {
           uploadInputRef.current.click();
         }}>Upload image</button>
         {uploadedFiles && uploadedFiles.map((item, index) => {
           return (
             <div className='toolbar__images_item' key={index} onClick={() => addImage(item, true)}>
-              <img width={40} height={60} src={item}></img>
+              <img width="100%" height="auto" src={item}></img>
             </div>
           )
         })}
       </div>}
 
-      {chosenCategory === "ai" && <div>
-        <p className='toolbar-title'>Uploads</p>
-        <input value={promptValue} onChange={(e) => setNewPromptValue(e.target.value)} type="text"></input>
-        <button onClick={generateImage}>Generate AI IMage</button>
+      {chosenCategory === "ai" && <div className='ai'>
+        <h1 className='toolbar-title'>Ai Images</h1>
+        <input placeholder='Enter here your prompt...' value={promptValue} onChange={(e) => setNewPromptValue(e.target.value)} type="text"></input>
+        <button onClick={generateImage}>Generate AI Image</button>
         {generatedImages && generatedImages.map((item, index) => {
           return (
             <div className='toolbar__images_item' key={index} onClick={() => addImage(item, true)}>

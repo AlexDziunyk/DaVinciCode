@@ -70,7 +70,7 @@ const MyBoard = ({ shapes, setShapes }) => {
         className='board'
         onMouseDown={checkDeselect}
         onTouchStart={checkDeselect}
-        width={window.innerWidth - 500}
+        width={window.innerWidth - 386}
         height={window.innerHeight}
         draggable
         onWheel={onWheel}

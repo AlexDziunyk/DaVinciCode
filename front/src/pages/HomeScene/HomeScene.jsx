@@ -11,11 +11,11 @@ const Home = () => {
   const { isLoggedIn } = useAuth();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (isLoggedIn) {
-      navigate("/login");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (isLoggedIn) {
+  //     navigate("/login");
+  //   }
+  // }, []);
 
   return (
     <div className="home-container">

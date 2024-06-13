@@ -10,7 +10,8 @@ const userSchema = new Schema({
   confirmationToken: { type: String },
   confirmed: { type: Boolean, default: false },
   myImages: [String],
-  aiImages: [String]
+  aiImages: [String],
+  shapes: [String]
 });
 
 const User = mongoose.model('User', userSchema);

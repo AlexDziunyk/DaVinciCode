@@ -6,16 +6,16 @@ import './style.scss';
 const RootPage = () => {
   const navigate = useNavigate();
   
-  // useEffect(() => {
-  //   const token = localStorage.getItem("token");
+  useEffect(() => {
+    const token = localStorage.getItem("token");
 
-  //   if (token) {
-  //     navigate('/login');
-  //   } else {
-  //     navigate('/');
-  //   }
+    if (token) {
+      navigate('/projects');
+    } else {
+      navigate('/');
+    }
 
-  // }, []);
+  }, []);
 
   return (
     <div>

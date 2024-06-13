@@ -18,9 +18,9 @@ const generateImage = async (req, res) => {
 
     const image_url = response.data[0].url;
 
-    const user = await User.findOne({ login: login });
-    user.aiImages.push(image_url);
-    await user.save();
+    // const user = await User.findOne({ login: login });
+    // user.aiImages.push(image_url);
+    // await user.save();
 
 
     return res.status(200).json({ result: image_url, message: "Image successfully generated!" });

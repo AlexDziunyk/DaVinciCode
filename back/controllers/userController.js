@@ -84,7 +84,6 @@ const uploadMyImage = async (req, res) => {
   } catch (error) {
     return res.status(500).json({ message: "Error with loading an image" });
   }
-
 }
 
 const getUploadedImages = async (req, res) => {
@@ -101,6 +100,47 @@ const getUploadedImages = async (req, res) => {
 
 }
 
+const saveShapes = async (req, res) => {
+  const { login } = req.login;
+  const { shapes } = req.body;
+
+  if(shapes.length == 0){
+    return res.status(200);
+  }
+
+  try {
+    const user = await User.findOne({ login: login });
+
+    user.shapes = [];
+
+    const shapesJson = JSON.stringify(shapes);
+    user.shapes.push(shapesJson);
+    await user.save();
+
+    return res.status(200).json({ message: "Successfully save shapes!" });
+  } catch (error) {
+    return res.status(500).json({ message: "Error with loading shapes" });
+  }
+}
+
+const getShapes = async (req, res) => {
+  const { login } = req.login;
+
+  try {
+    const user = await User.findOne({ login: login });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    const shapes = user.shapes.map(shape => JSON.parse(shape));
+
+    return res.status(200).json({ shapes: shapes[0] });
+  } catch (error) {
+    return res.status(500).json({ message: "Error fetching shapes", error: error.message });
+  }
+};
+
 const uploadAiImage = async (req, res) => {
   const { login } = req.login;
   const { image } = req.body;
@@ -110,9 +150,10 @@ const uploadAiImage = async (req, res) => {
     user.aiImages.push(image);
     await user.save();
 
-    return res.status(200).json({ message: "Successfully loaded ai image!" });
+    return res.status(200).json({ message: "Successfully loaded ai image!", result: true });
   } catch (error) {
-    return res.status(500).json({ message: "Error with loading an ai image" });
+    console.log(error);
+    return res.status(500).json({ message: "Error with loading an ai image", result: false });
   }
 
 }
@@ -132,4 +173,4 @@ const getAiImages = async (req, res) => {
 }
 
 
-module.exports = { createUser, loginUser, uploadMyImage, uploadAiImage, getUploadedImages, getAiImages };
+module.exports = { createUser, loginUser, uploadMyImage, uploadAiImage, getUploadedImages, getAiImages, saveShapes, getShapes };

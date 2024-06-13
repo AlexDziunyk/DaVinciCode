@@ -8,7 +8,8 @@ const userSchema = new Schema({
   email: { type: String, required: true },
   confirmationToken: { type: String },
   confirmed: { type: Boolean, default: false },
-  myImages: [String]
+  myImages: [String],
+  aiImages: [String]
 });
 
 const User = mongoose.model('user', userSchema);

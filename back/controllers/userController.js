@@ -101,5 +101,35 @@ const getUploadedImages = async (req, res) => {
 
 }
 
+const uploadAiImage = async (req, res) => {
+  const { login } = req.login;
+  const { image } = req.body;
 
-module.exports = { createUser, loginUser, uploadMyImage, getUploadedImages };
+  try {
+    const user = await User.findOne({ login: login });
+    user.aiImages.push(image);
+    await user.save();
+
+    return res.status(200).json({ message: "Successfully loaded ai image!" });
+  } catch (error) {
+    return res.status(500).json({ message: "Error with loading an ai image" });
+  }
+
+}
+
+const getAiImages = async (req, res) => {
+  const { login } = req.login;
+
+  try {
+    const user = await User.findOne({ login: login });
+
+    return res.status(200).json({ message: "Successfully got ai images!", result: user.aiImages });
+
+  } catch (error) {
+    return res.status(500).json({ message: "Error with getting ai images" });
+  }
+
+}
+
+
+module.exports = { createUser, loginUser, uploadMyImage, uploadAiImage, getUploadedImages, getAiImages };

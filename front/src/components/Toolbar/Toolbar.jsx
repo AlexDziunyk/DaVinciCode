@@ -19,7 +19,7 @@ const Toolbar = ({ shapes, setShapes }) => {
   const [chosenCategory, setChosenCategory] = useState("shapes");
   const [photos, setPhotos] = useState([]);
   const [uploadedFiles, setUploadedFiles] = useState([]);
-  const [newUploadedFile, setNewUploadedFile] = useState("");
+  //const [newUploadedFile, setNewUploadedFile] = useState("");
   const [promptValue, setNewPromptValue] = useState("");
   const [generatedImages, setGeneratedImages] = useState([]);
   const uploadInputRef = useRef(null);
@@ -41,9 +41,14 @@ const Toolbar = ({ shapes, setShapes }) => {
 
   }
 
-  useEffect(() => {
-    getUploadedImages();
-  }, []);
+  const getAiImages = async () => {
+    const { data } = await customAxios.get("/user/aiimages");
+
+    console.log(data)
+
+    setGeneratedImages(data.result);
+
+  }
 
   const uploadMyImage = async (fileImage) => {
     const formData = new FormData();
@@ -85,24 +90,26 @@ const Toolbar = ({ shapes, setShapes }) => {
     setGeneratedImages(prev => [data.result, ...prev]);
   }
 
-  useEffect(() => {
-    const fetchPhotos = async () => {
-      try {
-        const response = await axios.get('https://api.unsplash.com/photos', {
-          headers: {
-            Authorization: `Client-ID qmN4vxfH1dY-dJJSssRwFtjRUHm6-gLVBP11NVxMGEQ`
-          },
-          params: {
-            per_page: 16
-          }
-        });
-        setPhotos(response.data);
-        console.log(response.data)
-      } catch (error) {
-        console.error('Error fetching photos from Unsplash', error);
-      }
-    };
+  const fetchPhotos = async () => {
+    try {
+      const response = await axios.get('https://api.unsplash.com/photos', {
+        headers: {
+          Authorization: `Client-ID qmN4vxfH1dY-dJJSssRwFtjRUHm6-gLVBP11NVxMGEQ`
+        },
+        params: {
+          per_page: 16
+        }
+      });
+      setPhotos(response.data);
+      console.log(response.data)
+    } catch (error) {
+      console.error('Error fetching photos from Unsplash', error);
+    }
+  };
 
+  useEffect(() => {
+    getUploadedImages();
+    getAiImages();
     fetchPhotos();
   }, []);
 
@@ -167,7 +174,7 @@ const Toolbar = ({ shapes, setShapes }) => {
 
       {chosenCategory === "upload" && <div className='upload-file'>
         <h1 className='toolbar-title'>Uploads</h1>
-        <input value={newUploadedFile} onChange={handleInputChange} ref={uploadInputRef} hidden type="file"></input>
+        <input onChange={handleInputChange} ref={uploadInputRef} hidden type="file"></input>
         <button onClick={() => {
           uploadInputRef.current.click();
         }}>Upload image</button>
@@ -181,9 +188,9 @@ const Toolbar = ({ shapes, setShapes }) => {
       </div>}
 
       {chosenCategory === "ai" && <div className='ai'>
-        <h1 className='toolbar-title'>Uploads</h1>
+        <h1 className='toolbar-title'>Ai Images</h1>
         <input placeholder='Enter here your prompt...' value={promptValue} onChange={(e) => setNewPromptValue(e.target.value)} type="text"></input>
-        <button onClick={generateImage}>Generate AI IMage</button>
+        <button onClick={generateImage}>Generate AI Image</button>
         {generatedImages && generatedImages.map((item, index) => {
           return (
             <div className='toolbar__images_item' key={index} onClick={() => addImage(item, true)}>

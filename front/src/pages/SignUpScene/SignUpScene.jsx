@@ -97,21 +97,10 @@ const SignUp = () => {
         </div>
         <div className="social-login">
           <div className="social-buttons">
-            <a className="google-login-button" href="-" target="_blank"><img src={imagelogin1} alt="none" /></a>
+            <a className="google-login-button" href="auth/google/callback" target="_blank"><img src={imagelogin1} alt="none" /></a>
             <a className="twitter-login-button" href="-" target="_blank"><img src={imagelogin2} alt="none" /></a>
             <a className="facebook-login-button" href="-" target="_blank"><img src={imagelogin3} alt="none" /></a>
             <a className="linkedin-login-button" href="-" target="_blank"><img src={imagelogin4} alt="none" /></a>
-          </div>
-        </div>
-        <div className="divider">
-        <span>or</span>
-      </div>
-        <div className="social-login">
-          <div className="social-buttons">
-          <a className="google-login-button" href="-" target="_blank"><img src={imagelogin1} alt="none" /></a>
-          <a className="twitter-login-button" href="-" target="_blank"><img src={imagelogin2} alt="none" /></a>
-          <a className="facebook-login-button" href="-" target="_blank"><img src={imagelogin3} alt="none" /></a>
-          <a className="linkedin-login-button" href="-" target="_blank"><img src={imagelogin4} alt="none" /></a>
           </div>
         </div>
       </div>

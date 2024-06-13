@@ -1,0 +1,81 @@
+.profile-settings {
+  .tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+
+    .tab {
+      background: #e0e0e0;
+      border: none;
+      padding: 10px 20px;
+      margin: 0 10px;
+      border-radius: 20px;
+      cursor: pointer;
+
+      &.active {
+        background: #d3e3fc;
+      }
+    }
+  }
+
+  .content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    .profile-pic {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 20px;
+
+      .profile-placeholder {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background: #e0e0e0;
+        margin-bottom: 10px;
+      }
+
+      .choose-file {
+        background: #f0f0f0;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    }
+
+    .profile-form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .form-group {
+        margin-bottom: 15px;
+
+        label {
+          display: block;
+          margin-bottom: 5px;
+        }
+
+        input {
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          width: 200px;
+        }
+      }
+
+      .save-changes {
+        background: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    }
+  }
+}

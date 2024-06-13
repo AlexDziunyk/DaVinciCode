@@ -2,6 +2,15 @@ const express = require('express');
 const router = express.Router();
 const { sendConfirmationEmail } = require('../controllers/userController');
 const User = require('../models/user');
+const passport = require('../service/auth');
+
+router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+
+router.get('/google/callback',
+  passport.authenticate('google', { failureRedirect: '/login' }),
+  function(req, res) {
+    res.redirect('/'); 
+  });
 
 router.get('/confirm', async (req, res) => {
   const { token } = req.query;

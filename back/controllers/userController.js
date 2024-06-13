@@ -110,9 +110,10 @@ const uploadAiImage = async (req, res) => {
     user.aiImages.push(image);
     await user.save();
 
-    return res.status(200).json({ message: "Successfully loaded ai image!" });
+    return res.status(200).json({ message: "Successfully loaded ai image!", result: true });
   } catch (error) {
-    return res.status(500).json({ message: "Error with loading an ai image" });
+    console.log(error);
+    return res.status(500).json({ message: "Error with loading an ai image", result: false });
   }
 
 }

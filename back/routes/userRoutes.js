@@ -4,7 +4,7 @@ const { loginUser, createUser, uploadMyImage, getUploadedImages, getAiImages } =
 const { tokenVerify } = require('../middlewares/tokenVerify');
 const { imageUpload } = require('../middlewares/imageUpload');
 
-router.post('/register', createUser);
+router.post('/signup', createUser);
 router.post('/login', loginUser);
 router.post('/upload/myimages', imageUpload.single('image'), tokenVerify, uploadMyImage);
 router.post('/upload/aiimages', tokenVerify, uploadMyImage);

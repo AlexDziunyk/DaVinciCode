@@ -1,5 +1,9 @@
 import React from 'react';
 import './style.scss';
+import imagelogin1 from '../../assets/LoginSignup/search_281764.png';
+import imagelogin2 from '../../assets/LoginSignup/twitter-alt-circle_12107562.png';
+import imagelogin3 from '../../assets/LoginSignup/facebook_145802.png';
+import imagelogin4 from '../../assets/LoginSignup/linkedin_145807.png';
 
 const Login = () => {
   return (
@@ -21,13 +25,15 @@ const Login = () => {
         <div className="signup-link">
           Don't have an account? <a href="/signup">Signup</a>
         </div>
+        <div className="divider">
+        <span>or</span>
+      </div>
         <div className="social-login">
-          <p>or</p>
           <div className="social-buttons">
-            <button className="google-button">Google</button>
-            <button className="apple-button">Apple</button>
-            <button className="facebook-button">Facebook</button>
-            <button className="linkedin-button">LinkedIn</button>
+          <a className="google-login-button" href="-" target="_blank"><img src={imagelogin1} alt="none" /></a>
+          <a className="twitter-login-button" href="-" target="_blank"><img src={imagelogin2} alt="none" /></a>
+          <a className="facebook-login-button" href="-" target="_blank"><img src={imagelogin3} alt="none" /></a>
+          <a className="linkedin-login-button" href="-" target="_blank"><img src={imagelogin4} alt="none" /></a>
           </div>
         </div>
       </div>

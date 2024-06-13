@@ -43,7 +43,6 @@ app.get('/confirm', async (req, res) => {
   }
 });
 
-app.use('/api/users', userRoutes);
 app.use('/api/openai', openaiRoutes);
 app.use('/api/user', userRoutes);
 

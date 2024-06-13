@@ -77,7 +77,7 @@ const MyBoard = ({ shapes, setShapes }) => {
         scale={{ x: stageScale, y: stageScale }}
       >
         <Layer ref={layerRef}>
-          {shapes.map((shape, i) => {
+          {shapes && shapes.map((shape, i) => {
             if (shape.type === "rect") {
               return (
                 <Rectangle

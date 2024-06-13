@@ -23,7 +23,6 @@ const Toolbar = ({ shapes, setShapes }) => {
   const [isPopupOpened, setIsPopupOpened] = useState(false);
   const [promptValue, setNewPromptValue] = useState("");
   const [generatedImages, setGeneratedImages] = useState([]);
-  const [generatedResult, setGeneratedResult] = useState();
   const uploadInputRef = useRef(null);
 
   const debounce = (func, wait) => {
@@ -92,7 +91,6 @@ const Toolbar = ({ shapes, setShapes }) => {
     let result = "";
 
     if (data.result) {
-      setGeneratedResult(data.result);
       result = data.result
     }
 

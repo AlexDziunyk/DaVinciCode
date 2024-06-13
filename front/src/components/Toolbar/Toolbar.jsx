@@ -23,7 +23,6 @@ const Toolbar = ({ shapes, setShapes }) => {
   const [isPopupOpened, setIsPopupOpened] = useState(false);
   const [promptValue, setNewPromptValue] = useState("");
   const [generatedImages, setGeneratedImages] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
   const [generatedResult, setGeneratedResult] = useState();
   const uploadInputRef = useRef(null);
 
@@ -93,7 +92,6 @@ const Toolbar = ({ shapes, setShapes }) => {
     let result = "";
 
     if (data.result) {
-      //setGeneratedImages(prev => [data.result, ...prev]);
       setGeneratedResult(data.result);
       result = data.result
     }
@@ -139,7 +137,7 @@ const Toolbar = ({ shapes, setShapes }) => {
 
   return (
     <>
-      {isPopupOpened && <Popup isLoading={isLoading} onAccept={acceptGeneratedImage} onClick={generateImage} setInputValue={(e) => setNewPromptValue(e.target.value)} onClose={() => setIsPopupOpened(false)} />}
+      {isPopupOpened && <Popup onAccept={acceptGeneratedImage} onClick={generateImage} setInputValue={(e) => setNewPromptValue(e.target.value)} onClose={() => setIsPopupOpened(false)} />}
 
       <div className='toolbar'>
         <div className='toolbar__tools'>

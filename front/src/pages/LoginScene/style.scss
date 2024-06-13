@@ -21,7 +21,6 @@
   border-radius: 30px;
   background: #FFF;
   box-shadow: 4px 7px 4px 0px rgba(0, 0, 0, 0.25);
-
 }
 
 .login-box h2 {
@@ -37,7 +36,8 @@
   letter-spacing: 3.2px;
 }
 
-.input-group {
+.input-group
+{
   margin-bottom: 20px;
 
   input {
@@ -130,7 +130,6 @@
 .social-buttons {
   display: flex;
   justify-content: space-between;
-
 }
 
 .google-login-button {

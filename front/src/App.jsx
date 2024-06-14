@@ -26,8 +26,8 @@ function App() {
       <Route path="signup" element={<SignUpPage />} />
       {/* <Route path="auth/google/callback" component={GoogleCallback} /> */}
       {/* <Route path='scene' element={<Scene />} /> */}
-      <Route path='profile' element={<ProfilePage />} />
-      <Route path='profile/projects' element={<ProjectsPage />} />
+      {/* <Route path='profile' element={<ProfilePage />} /> */}
+      <Route path='profile' element={<ProjectsPage />} />
       <Route path='projects/:id' element={<Scene />} />
     </Route>
   ));

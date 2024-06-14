@@ -23,7 +23,7 @@ const Navbar = () => {
       <div className={`navbar ${isLoggedIn && "logged-in"}`}>
 
         {isLoggedIn ?
-          <Link className='navbar__logo' to="/projects">
+          <Link className='navbar__logo' to="/profile">
             <img src={logo} alt='logo'></img>
           </Link>
           :

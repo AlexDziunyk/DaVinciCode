@@ -13,7 +13,7 @@ const Home = () => {
 
   useEffect(() => {
     if (isLoggedIn) {
-      navigate("/profile/projects");
+      navigate("/profile");
     }
   }, []);
 

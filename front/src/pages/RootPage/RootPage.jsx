@@ -4,19 +4,6 @@ import Navbar from '../../components/Navbar/Navbar';
 import './style.scss';
 
 const RootPage = () => {
-  const navigate = useNavigate();
-  
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-
-    if (token) {
-      navigate('/profile/projects');
-    } else {
-      navigate('/');
-    }
-
-  }, []);
-
   return (
     <div>
       <Navbar />

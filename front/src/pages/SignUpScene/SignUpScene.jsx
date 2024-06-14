@@ -31,7 +31,7 @@ const SignUp = () => {
       if (data.token) {
         localStorage.setItem("token", data.token);
         setIsLoggedIn(true);
-        navigate('/projects');
+        navigate('/profile/projects');
 
         return;
       }

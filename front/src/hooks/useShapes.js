@@ -1,21 +1,21 @@
 import { useState, useEffect } from 'react';
 import axios from '../axios/axios'
 
-const useShapes = () => {
+const useShapes = (id) => {
   const [shapes, setShapes] = useState([]);
 
   useEffect(() => {
     console.log('Shapes changed:', shapes); 
     
-    saveShapes(shapes);
+    saveShapes(shapes, id);
 
   }, [shapes]);
 
   return [shapes, setShapes];
 };
 
-async function saveShapes(shapes){
-  const response = await axios.post("/user/shapes", { shapes });
+async function saveShapes(shapes, id){
+  const response = await axios.post(`/user/shapes/${id}`, { shapes });
 }
 
 export default useShapes;

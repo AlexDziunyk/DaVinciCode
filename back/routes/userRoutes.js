@@ -8,9 +8,12 @@ router.post('/signup', createUser);
 router.post('/login', loginUser);
 router.post('/upload/myimages', imageUpload.single('image'), tokenVerify, uploadMyImage);
 router.post('/upload/aiimages', tokenVerify, uploadAiImage);
-router.post('/shapes', tokenVerify, saveShapes);
+
+router.post('/shapes/:id', tokenVerify, saveShapes);
+
 router.get('/aiimages', tokenVerify, getAiImages);
 router.get('/myimages', tokenVerify, getUploadedImages);
-router.get('/shapes', tokenVerify, getShapes);
+
+router.get('/shapes/:id', tokenVerify, getShapes);
 
 module.exports = router;

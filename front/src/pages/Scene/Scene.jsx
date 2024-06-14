@@ -4,13 +4,19 @@ import useShapes from '../../hooks/useShapes';
 import { useEffect } from 'react';
 import axios from '../../axios/axios'
 import './style.scss';
+import { useParams } from 'react-router-dom';
 
 const Scene = () => {
-  const [shapes, setShapes] = useShapes();
+
+  const { id } = useParams();
+
+  const [shapes, setShapes] = useShapes(id);
+
+
 
   useEffect(() => {
     const fetchShapes = async () => {
-      const { data } = await axios.get("/user/shapes");
+      const { data } = await axios.get(`/user/shapes/${id}`);
 
       setShapes(data.shapes ?? []);
     };
@@ -24,7 +30,7 @@ const Scene = () => {
 
   return (
     <div className='scene'>
-      <Toolbar shapes={shapes} setShapes={setShapes} />
+      <Toolbar shapes={shapes} setShapes={setShapes}  />
       <MyBoard shapes={shapes} setShapes={setShapes} />
 
     </div>

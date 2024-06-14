@@ -10,7 +10,7 @@ const RootPage = () => {
     const token = localStorage.getItem("token");
 
     if (token) {
-      navigate('/projects');
+      navigate('/profile/projects');
     } else {
       navigate('/');
     }

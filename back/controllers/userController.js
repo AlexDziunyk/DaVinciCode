@@ -5,11 +5,12 @@ const { sendConfirmationEmail } = require('../service/emailService');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
+const Project = require('../models/project');
 
 const createUser = async (req, res) => {
   const { login, password, email } = req.body;
   const hashedPassword = await bcrypt.hash(password, 10);
-  
+
   try {
     const existingUser = await User.findOne({ login });
     if (existingUser) {
@@ -103,19 +104,27 @@ const getUploadedImages = async (req, res) => {
 const saveShapes = async (req, res) => {
   const { login } = req.login;
   const { shapes } = req.body;
+  const { id } = req.params;
 
-  if(shapes.length == 0){
+  if (shapes.length == 0) {
     return res.status(200);
   }
 
   try {
-    const user = await User.findOne({ login: login });
+    //const user = await User.findOne({ login: login });
 
-    user.shapes = [];
+    const project = await Project.findById(id);
+
+
+
+    project.shapes = [];
 
     const shapesJson = JSON.stringify(shapes);
-    user.shapes.push(shapesJson);
-    await user.save();
+
+    project.shapes = project.shapes.concat(shapesJson);
+    await project.save();
+
+    console.log(project)
 
     return res.status(200).json({ message: "Successfully save shapes!" });
   } catch (error) {
@@ -125,6 +134,7 @@ const saveShapes = async (req, res) => {
 
 const getShapes = async (req, res) => {
   const { login } = req.login;
+  const { id } = req.params;
 
   try {
     const user = await User.findOne({ login: login });
@@ -133,13 +143,18 @@ const getShapes = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    const shapes = user.shapes.map(shape => JSON.parse(shape));
+    // const shapes = user.shapes.map(shape => JSON.parse(shape));
+    const project = await Project.findById(id);
+    const shapes = project.shapes.map(shape => JSON.parse(shape));
+
+    
 
     return res.status(200).json({ shapes: shapes[0] });
   } catch (error) {
     return res.status(500).json({ message: "Error fetching shapes", error: error.message });
   }
 };
+
 
 const uploadAiImage = async (req, res) => {
   const { login } = req.login;

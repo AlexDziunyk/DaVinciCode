@@ -11,10 +11,10 @@ const userSchema = new Schema({
   confirmed: { type: Boolean, default: false },
   myImages: [String],
   aiImages: [String],
-  shapes: [String]
+  shapes: [String],
+  projects: [{ type: Schema.Types.ObjectId, ref: 'project' }],
 });
 
 const User = mongoose.model('User', userSchema);
 
 module.exports = User;
-profileImage

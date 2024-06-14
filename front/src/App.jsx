@@ -9,12 +9,13 @@ import HomePage from './pages/HomeScene/HomeScene';
 import LoginPage from './pages/LoginScene/LoginScene';
 import SignUpPage from './pages/SignUpScene/SignUpScene';
 import RootPage from './pages/RootPage/RootPage';
-import ProfilePage from './pages/ProfileScene/ProfileScene'; 
+import ProfilePage from './pages/ProfileScene/ProfileScene';
 import ProjectsPage from './pages/ProjectsScene/ProjectsScene';
 
 import { AuthProvider } from './context/AuthContext';
 import axios from './axios/axios';
-import GoogleCallback from './config/GoogleCallback'; 
+import GoogleCallback from './config/GoogleCallback';
+import { ProjectsProvider } from './context/ProjectsContext';
 
 function App() {
 
@@ -23,11 +24,11 @@ function App() {
       <Route index element={<HomePage />} />
       <Route path="login" element={<LoginPage />} />
       <Route path="signup" element={<SignUpPage />} />
-      <Route path="auth/google/callback" component={GoogleCallback} />
-      <Route path="projects" element={<SignUpPage />} />
-      <Route path='scene' element={<Scene />} />
+      {/* <Route path="auth/google/callback" component={GoogleCallback} /> */}
+      {/* <Route path='scene' element={<Scene />} /> */}
       <Route path='profile' element={<ProfilePage />} />
       <Route path='profile/projects' element={<ProjectsPage />} />
+      <Route path='projects/:id' element={<Scene />} />
     </Route>
   ));
 
@@ -35,7 +36,9 @@ function App() {
   return (
     <div className='app'>
       <AuthProvider>
-        <RouterProvider router={router} />
+        <ProjectsProvider>
+          <RouterProvider router={router} />
+        </ProjectsProvider>
       </AuthProvider>
     </div>
   );

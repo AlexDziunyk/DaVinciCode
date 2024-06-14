@@ -5,7 +5,7 @@
   width: 386px;
   display: flex;
   flex-direction: row;
-  height: 100vh;
+  height: calc(100vh - 115px);
   overflow: auto;
   box-sizing: border-box;
 

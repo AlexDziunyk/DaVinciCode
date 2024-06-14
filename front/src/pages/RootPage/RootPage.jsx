@@ -9,9 +9,7 @@ const RootPage = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
 
-    if (token) {
-      navigate('/projects');
-    } else {
+    if (!token) {
       navigate('/');
     }
 
@@ -27,4 +25,4 @@ const RootPage = () => {
   )
 }
 
-export default RootPage
+export default RootPage;

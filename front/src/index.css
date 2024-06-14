@@ -13,3 +13,8 @@ body {
   color: rgb(185, 43, 43);
   font-style: 18px;
 }
+
+.success {
+  color: rgb(32, 156, 38);
+  font-style: 18px;
+}

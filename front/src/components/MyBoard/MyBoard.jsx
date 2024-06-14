@@ -71,7 +71,7 @@ const MyBoard = ({ shapes, setShapes }) => {
         onMouseDown={checkDeselect}
         onTouchStart={checkDeselect}
         width={window.innerWidth - 386}
-        height={window.innerHeight}
+        height={window.innerHeight - 115}
         draggable
         onWheel={onWheel}
         scale={{ x: stageScale, y: stageScale }}

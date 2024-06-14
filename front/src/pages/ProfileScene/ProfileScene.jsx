@@ -1,4 +1,4 @@
-import React, { useState, useEffect  } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './style.scss';
 
@@ -7,13 +7,15 @@ const ProfileSettings = () => {
   const [projects, setProjects] = useState([]);
   const [profileImage, setProfileImage] = useState('');
   const [selectedFile, setSelectedFile] = useState(null);
-  const userId = ''; 
+  const userId = '';
 
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await axios.get('http://localhost:4001/projects');
-        setProjects(response.data);
+        const { data } = await axios.get('/projects/my');
+
+        setProjects(data.result);
+        console.log(data.result)
       } catch (error) {
         console.error('Error fetching projects:', error);
       }
@@ -67,7 +69,7 @@ const ProfileSettings = () => {
       </div>
       {tab === 'projects' ? (
         <div className="projects">
-          {projects.map(project => (
+          {projects && projects.map(project => (
             <div key={project._id} className="project-card">
               <img src={project.image} alt={project.description} />
               <p>{project.description}</p>

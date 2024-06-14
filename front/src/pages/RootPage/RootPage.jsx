@@ -4,6 +4,17 @@ import Navbar from '../../components/Navbar/Navbar';
 import './style.scss';
 
 const RootPage = () => {
+  const navigate = useNavigate();
+  
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      navigate('/');
+    }
+
+  }, []);
+
   return (
     <div>
       <Navbar />
@@ -14,4 +25,4 @@ const RootPage = () => {
   )
 }
 
-export default RootPage
+export default RootPage;

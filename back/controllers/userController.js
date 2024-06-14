@@ -147,7 +147,7 @@ const getShapes = async (req, res) => {
     const project = await Project.findById(id);
     const shapes = project.shapes.map(shape => JSON.parse(shape));
 
-    
+
 
     return res.status(200).json({ shapes: shapes[0] });
   } catch (error) {
@@ -187,5 +187,38 @@ const getAiImages = async (req, res) => {
 
 }
 
+const getInfo = async (req, res) => {
+  const { login } = req.login;
 
-module.exports = { createUser, loginUser, uploadMyImage, uploadAiImage, getUploadedImages, getAiImages, saveShapes, getShapes };
+  try {
+    const user = await User.findOne({ login: login });
+
+    return res.status(200).json({ message: "Info successfully retrieved", result: user });
+
+  } catch (error) {
+    return res.status(500).json({ message: "Error!" });
+  }
+}
+
+const updateInfo = async (req, res) => {
+  const { login } = req.login;
+  const { profilename, email } = req.body;
+
+  try {
+    const user = await User.findOne({ login: login });
+
+    user.profilename = profilename;
+    user.email = email;
+
+    await user.save();
+
+    return res.status(200).json({ message: "Info successfully retrieved", result: true });
+
+  } catch (error) {
+    return res.status(500).json({ message: "Error!" });
+  }
+}
+
+
+
+module.exports = { createUser, loginUser, uploadMyImage, uploadAiImage, getUploadedImages, getAiImages, saveShapes, getShapes, updateInfo, getInfo };

@@ -28,7 +28,7 @@ const Home = () => {
             </p>
           </div>
           <div>
-            <button id="start-creating">Start Creating Now</button>
+            <button id="start-creating"><Link style={{textDecoration: "none", color: "#fff"}} to="/login">Start Creating Now</Link></button>
             <p className="rating"><span className='star'>★ 5.0</span> Over <span className='number'>250+</span> customers used Inspira</p>
           </div>
         </section>
